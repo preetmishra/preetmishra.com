@@ -15,19 +15,19 @@ Git provides interactive rebase command which can be used to squash several comm
 
 - For demonstration, I have already created a git repository with _notes.txt_.
 
-```
+```bash
 Preet Mishra@LegionY520 in squash-demo (master)
 $ ls -a
 ./  ../  .git/  notes.txt
 ```
 
-```
+```bash
 Preet Mishra@LegionY520 in squash-demo (master)
 $ cat notes.txt
 A list of useful git commands:
 ```
 
-```
+```bash
 Preet Mishra@LegionY520 in squash-demo (master)
 $ git log --oneline
 c5ec2de (HEAD -> master) Initial commit
@@ -35,7 +35,7 @@ c5ec2de (HEAD -> master) Initial commit
 
 - Now, I am going to add three different commits which will add a single point each in _notes.txt_.
 
-```
+```bash
 Preet Mishra@LegionY520 in squash-demo (master)
 $ git log --oneline
 998c20c (HEAD -> master) Add point no. 3
@@ -44,7 +44,7 @@ e94c4a9 Add point no. 1
 c5ec2de Initial commit
 ```
 
-```
+```bash
 Preet Mishra@LegionY520 in squash-demo (master)
 $ cat notes.txt
 A list of useful git commands:
@@ -55,14 +55,14 @@ A list of useful git commands:
 
 - Since these three commits are pretty much similar and could be done in a single commit, I am going to use `git rebase -i HEAD~no_of_commits_to_squash` to squash these commits into one.
 
-```
+```bash
 Preet Mishra@LegionY520 in squash-demo (master)
 $ git rebase -i HEAD~3
 ```
 
 - Next, there will be a prompt to choose the operation that we'd like want to perform.
 
-```
+```bash
 pick e94c4a9 Add point no. 1
 pick 5123573 Add point no. 2
 pick 998c20c Add point no. 3
@@ -96,7 +96,7 @@ pick 998c20c Add point no. 3
 
 For squashing, I am going to choose,
 
-```
+```bash
 s - for squash
 and
 r - for rename
@@ -104,7 +104,7 @@ r - for rename
 
 _Remember to choose the oldest commit to rename and the rest of the commits to squash._
 
-```
+```bash
 r e94c4a9 Add point no. 1
 s 5123573 Add point no. 2
 s 998c20c Add point no. 3
@@ -112,7 +112,7 @@ s 998c20c Add point no. 3
 
 - Git now will prompt to rename the chosen commit.
 
-```
+```bash
 Add point no. 1
 
 # Please enter the commit message for your changes. Lines starting
@@ -135,7 +135,7 @@ Add point no. 1
 
 - I am going to rename the file, save and close the editor to proceed.
 
-```
+```bash
 Add points
 
 # Please enter the commit message for your changes. Lines starting
@@ -158,7 +158,7 @@ Add points
 
 - Next, Git will prompt us to write a commit message for our final commit.
 
-```
+```bash
 # This is a combination of 3 commits.
 # This is the 1st commit message:
 
@@ -191,7 +191,7 @@ Add point no. 3
 
 - I am going to edit the commit message, save and close the editor again to proceed.
 
-```
+```bash
 Add points
 
 # Please enter the commit message for your changes. Lines starting
@@ -213,7 +213,7 @@ Add points
 
 - If everything goes right, you will see a success message in your terminal.
 
-```
+```bash
 Preet Mishra@LegionY520 in squash-demo (master)
 $ git rebase -i HEAD~3
 hint: Waiting for your editor to close the file...
@@ -230,14 +230,14 @@ Successfully rebased and updated refs/heads/master.
 
 - **Voila!** We are done.
 
-```
+```bash
 Preet Mishra@LegionY520 in squash-demo (master)
 $ git log --oneline
 ef9a545 (HEAD -> master) Add points
 c5ec2de Initial commit
 ```
 
-```
+```bash
 Preet Mishra@LegionY520 in squash-demo (master)
 $ cat notes.txt
 A list of useful git commands:

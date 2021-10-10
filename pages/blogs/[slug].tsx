@@ -56,9 +56,9 @@ const Blog: NextPage<Props> = ({ frontmatter, code }) => {
         <title>{frontmatter.title}</title>
       </Head>
       <Navbar />
-      <section>
+      <article className="prose">
         <Component />
-      </section>
+      </article>
     </>
   );
 };

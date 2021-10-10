@@ -1,3 +1,5 @@
+const colors = require("tailwindcss/colors");
+
 module.exports = {
   purge: [
     "./pages/**/*.{js,ts,jsx,tsx}",
@@ -5,10 +7,20 @@ module.exports = {
   ],
   darkMode: false, // or 'media' or 'class'
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        // For Syntax Highlighting.
+        teal: colors.cyan,
+        fuchsia: colors.fuchsia,
+        lime: colors.lime,
+        sky: colors.sky,
+        rose: colors.rose,
+        emerald: colors.emerald,
+      },
+    },
   },
   variants: {
     extend: {},
   },
-  plugins: [],
+  plugins: [require("@tailwindcss/typography")],
 };

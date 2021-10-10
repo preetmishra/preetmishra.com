@@ -2,6 +2,7 @@ import fs from "fs";
 import path from "path";
 
 import matter from "gray-matter";
+import rehypePrism from "rehype-prism-plus";
 import { bundleMDXFile } from "mdx-bundler";
 
 const ENCODING = "utf8";
@@ -22,7 +23,7 @@ const getCompiledMDX = async (source: string) => {
   const { default: gfm } = await import("remark-gfm");
 
   const remarkPlugins: Array<any> = [gfm];
-  const rehypePlugins: Array<any> = [];
+  const rehypePlugins: Array<any> = [rehypePrism];
 
   return await bundleMDXFile(source, {
     xdmOptions(options) {
