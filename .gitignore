@@ -9,4 +9,5 @@ yarn-error.log*
 /.next/
 /out/
 /build
+.vscode/
 *.lock

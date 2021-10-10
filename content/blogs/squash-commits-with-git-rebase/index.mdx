@@ -1,0 +1,254 @@
+---
+title: Squash commits with git rebase
+published: "2019-08-10"
+description: Have you ever run into a situation where you end up doing a lot of commits which are similar and could have been put in a single commit? Well, git has got you covered.
+tags: git, github, bitbucket, gitlab
+---
+
+Have you ever run into a situation where you end up doing a lot of commits which are similar and could have been put in a single commit?
+
+Well, _git_ has got you covered.
+
+Git provides interactive rebase command which can be used to squash several commits into a single commit.
+
+#### Demonstration
+
+- For demonstration, I have already created a git repository with _notes.txt_.
+
+```
+Preet Mishra@LegionY520 in squash-demo (master)
+$ ls -a
+./  ../  .git/  notes.txt
+```
+
+```
+Preet Mishra@LegionY520 in squash-demo (master)
+$ cat notes.txt
+A list of useful git commands:
+```
+
+```
+Preet Mishra@LegionY520 in squash-demo (master)
+$ git log --oneline
+c5ec2de (HEAD -> master) Initial commit
+```
+
+- Now, I am going to add three different commits which will add a single point each in _notes.txt_.
+
+```
+Preet Mishra@LegionY520 in squash-demo (master)
+$ git log --oneline
+998c20c (HEAD -> master) Add point no. 3
+5123573 Add point no. 2
+e94c4a9 Add point no. 1
+c5ec2de Initial commit
+```
+
+```
+Preet Mishra@LegionY520 in squash-demo (master)
+$ cat notes.txt
+A list of useful git commands:
+1) git add
+2) git commit
+3) git status
+```
+
+- Since these three commits are pretty much similar and could be done in a single commit, I am going to use `git rebase -i HEAD~no_of_commits_to_squash` to squash these commits into one.
+
+```
+Preet Mishra@LegionY520 in squash-demo (master)
+$ git rebase -i HEAD~3
+```
+
+- Next, there will be a prompt to choose the operation that we'd like want to perform.
+
+```
+pick e94c4a9 Add point no. 1
+pick 5123573 Add point no. 2
+pick 998c20c Add point no. 3
+
+# Rebase c5ec2de..998c20c onto c5ec2de (3 commands)
+#
+# Commands:
+# p, pick <commit> = use commit
+# r, reword <commit> = use commit, but edit the commit message
+# e, edit <commit> = use commit, but stop for amending
+# s, squash <commit> = use commit, but meld into previous commit
+# f, fixup <commit> = like "squash", but discard this commit's log message
+# x, exec <command> = run command (the rest of the line) using shell
+# b, break = stop here (continue rebase later with 'git rebase --continue')
+# d, drop <commit> = remove commit
+# l, label <label> = label current HEAD with a name
+# t, reset <label> = reset HEAD to a label
+# m, merge [-C <commit> | -c <commit>] <label> [# <oneline>]
+# .       create a merge commit using the original merge commit's
+# .       message (or the oneline, if no original merge commit was
+# .       specified). Use -c <commit> to reword the commit message.
+#
+# These lines can be re-ordered; they are executed from top to bottom.
+#
+# If you remove a line here THAT COMMIT WILL BE LOST.
+#
+# However, if you remove everything, the rebase will be aborted.
+#
+# Note that empty commits are commented out
+```
+
+For squashing, I am going to choose,
+
+```
+s - for squash
+and
+r - for rename
+```
+
+_Remember to choose the oldest commit to rename and the rest of the commits to squash._
+
+```
+r e94c4a9 Add point no. 1
+s 5123573 Add point no. 2
+s 998c20c Add point no. 3
+```
+
+- Git now will prompt to rename the chosen commit.
+
+```
+Add point no. 1
+
+# Please enter the commit message for your changes. Lines starting
+# with '#' will be ignored, and an empty message aborts the commit.
+#
+# Date:      Sat Aug 10 17:08:17 2019 +0530
+#
+# interactive rebase in progress; onto c5ec2de
+# Last command done (1 command done):
+#    reword e94c4a9 Add point no. 1
+# Next commands to do (2 remaining commands):
+#    squash 5123573 Add point no. 2
+#    squash 998c20c Add point no. 3
+# You are currently editing a commit while rebasing branch 'master' on 'c5ec2de'.
+#
+# Changes to be committed:
+#	modified:   notes.txt
+#
+```
+
+- I am going to rename the file, save and close the editor to proceed.
+
+```
+Add points
+
+# Please enter the commit message for your changes. Lines starting
+# with '#' will be ignored, and an empty message aborts the commit.
+#
+# Date:      Sat Aug 10 17:08:17 2019 +0530
+#
+# interactive rebase in progress; onto c5ec2de
+# Last command done (1 command done):
+#    reword e94c4a9 Add point no. 1
+# Next commands to do (2 remaining commands):
+#    squash 5123573 Add point no. 2
+#    squash 998c20c Add point no. 3
+# You are currently editing a commit while rebasing branch 'master' on 'c5ec2de'.
+#
+# Changes to be committed:
+#	modified:   notes.txt
+#
+```
+
+- Next, Git will prompt us to write a commit message for our final commit.
+
+```
+# This is a combination of 3 commits.
+# This is the 1st commit message:
+
+Add points
+
+# This is the commit message #2:
+
+Add point no. 2
+
+# This is the commit message #3:
+
+Add point no. 3
+
+# Please enter the commit message for your changes. Lines starting
+# with '#' will be ignored, and an empty message aborts the commit.
+#
+# Date:      Sat Aug 10 17:08:17 2019 +0530
+#
+# interactive rebase in progress; onto c5ec2de
+# Last commands done (3 commands done):
+#    squash 5123573 Add point no. 2
+#    squash 998c20c Add point no. 3
+# No commands remaining.
+# You are currently rebasing branch 'master' on 'c5ec2de'.
+#
+# Changes to be committed:
+#	modified:   notes.txt
+#
+```
+
+- I am going to edit the commit message, save and close the editor again to proceed.
+
+```
+Add points
+
+# Please enter the commit message for your changes. Lines starting
+# with '#' will be ignored, and an empty message aborts the commit.
+#
+# Date:      Sat Aug 10 17:08:17 2019 +0530
+#
+# interactive rebase in progress; onto c5ec2de
+# Last commands done (3 commands done):
+#    squash 5123573 Add point no. 2
+#    squash 998c20c Add point no. 3
+# No commands remaining.
+# You are currently rebasing branch 'master' on 'c5ec2de'.
+#
+# Changes to be committed:
+#	modified:   notes.txt
+#
+```
+
+- If everything goes right, you will see a success message in your terminal.
+
+```
+Preet Mishra@LegionY520 in squash-demo (master)
+$ git rebase -i HEAD~3
+hint: Waiting for your editor to close the file...
+hint: Waiting for your editor to close the file...
+[detached HEAD e10f94e] Add points
+ Date: Sat Aug 10 17:08:17 2019 +0530
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+hint: Waiting for your editor to close the file...
+[detached HEAD ef9a545] Add points
+ Date: Sat Aug 10 17:08:17 2019 +0530
+ 1 file changed, 3 insertions(+), 1 deletion(-)
+Successfully rebased and updated refs/heads/master.
+```
+
+- **Voila!** We are done.
+
+```
+Preet Mishra@LegionY520 in squash-demo (master)
+$ git log --oneline
+ef9a545 (HEAD -> master) Add points
+c5ec2de Initial commit
+```
+
+```
+Preet Mishra@LegionY520 in squash-demo (master)
+$ cat notes.txt
+A list of useful git commands:
+1) git add
+2) git commit
+3) git status
+```
+
+We have successfully squashed those three commits into one.
+
+#### A word of advice
+
+Git rebase rewrites history which can create problems when working with a team. Make sure that you are aware of what you are trying to do before squashing.
+If you are new to this concept, I would suggest you to create a _backup_ branch before you proceed.
