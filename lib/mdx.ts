@@ -9,10 +9,10 @@ const ENCODING = "utf8";
 const FILENAME_INDEX = "index.mdx";
 
 const PATH_ROOT = process.cwd();
-const PATH_BLOGS = path.join(PATH_ROOT, "content/blogs");
+const PATH_POSTS = path.join(PATH_ROOT, "content/posts");
 
 const getFilePath = (dirname: string) => {
-  return path.join(PATH_BLOGS, dirname, FILENAME_INDEX);
+  return path.join(PATH_POSTS, dirname, FILENAME_INDEX);
 };
 
 const getFileContent = (dirname: string) => {
@@ -41,7 +41,7 @@ const getCompiledMDX = async (source: string) => {
   });
 };
 
-const getBlog = async (slug: string) => {
+const getPost = async (slug: string) => {
   const source = getFilePath(slug);
   const { code, frontmatter } = await getCompiledMDX(source);
 
@@ -51,8 +51,8 @@ const getBlog = async (slug: string) => {
   };
 };
 
-const getBlogList = () => {
-  return fs.readdirSync(PATH_BLOGS).map((dirname) => {
+const getPosts = () => {
+  return fs.readdirSync(PATH_POSTS).map((dirname) => {
     const content = getFileContent(dirname);
     const { data: frontmatter } = matter(content);
 
@@ -63,8 +63,8 @@ const getBlogList = () => {
   });
 };
 
-const getBlogSlugs = () => {
-  return fs.readdirSync(PATH_BLOGS);
+const getPostSlugs = () => {
+  return fs.readdirSync(PATH_POSTS);
 };
 
-export { getBlog, getBlogList, getBlogSlugs };
+export { getPost, getPosts, getPostSlugs };

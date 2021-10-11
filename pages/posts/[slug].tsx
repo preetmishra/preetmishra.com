@@ -5,7 +5,7 @@ import { GetStaticPaths, GetStaticProps, NextPage } from "next";
 import { getMDXComponent } from "mdx-bundler/client";
 
 import Navbar from "../../components/Navbar";
-import { getBlog, getBlogSlugs } from "../../lib/mdx";
+import { getPost, getPostSlugs } from "../../lib/mdx";
 
 interface Params extends ParsedUrlQuery {
   slug: string;
@@ -17,7 +17,7 @@ type Props = {
 };
 
 export const getStaticPaths: GetStaticPaths<Params> = async () => {
-  const paths = getBlogSlugs().map((slug) => ({
+  const paths = getPostSlugs().map((slug) => ({
     params: {
       slug,
     },
@@ -42,12 +42,12 @@ export const getStaticProps: GetStaticProps<Props, Params> = async ({
 
   return {
     props: {
-      ...(await getBlog(slug)),
+      ...(await getPost(slug)),
     },
   };
 };
 
-const Blog: NextPage<Props> = ({ frontmatter, code }) => {
+const Post: NextPage<Props> = ({ frontmatter, code }) => {
   const Component = useMemo(() => getMDXComponent(code), [code]);
 
   return (
@@ -63,4 +63,4 @@ const Blog: NextPage<Props> = ({ frontmatter, code }) => {
   );
 };
 
-export default Blog;
+export default Post;

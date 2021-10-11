@@ -3,21 +3,21 @@ import Head from "next/head";
 import Link from "next/link";
 
 import Navbar from "../components/Navbar";
-import { getBlogList } from "../lib/mdx";
+import { getPosts } from "../lib/mdx";
 
 type Props = {
-  blogs: Array<{ frontmatter: Record<string, any>; slug: string }>;
+  posts: Array<{ frontmatter: Record<string, any>; slug: string }>;
 };
 
 export const getStaticProps: GetStaticProps = async () => {
   return {
     props: {
-      blogs: getBlogList(),
+      posts: getPosts(),
     },
   };
 };
 
-const Home: NextPage<Props> = ({ blogs }) => {
+const Home: NextPage<Props> = ({ posts }) => {
   return (
     <>
       <Head>
@@ -25,9 +25,9 @@ const Home: NextPage<Props> = ({ blogs }) => {
       </Head>
       <Navbar />
       <section>
-        {blogs.map(({ frontmatter: { title }, slug }, index) => (
+        {posts.map(({ frontmatter: { title }, slug }, index) => (
           <h2 key={index}>
-            <Link href={`/blogs/${slug}`}>{title}</Link>
+            <Link href={`/posts/${slug}`}>{title}</Link>
           </h2>
         ))}
       </section>
