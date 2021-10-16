@@ -2,4 +2,4 @@
 @tailwind components;
 @tailwind utilities;
 
-@import "./prism.css";
+@import "./base.css";

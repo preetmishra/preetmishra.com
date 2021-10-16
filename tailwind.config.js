@@ -1,4 +1,5 @@
 const colors = require("tailwindcss/colors");
+const defaultTheme = require("tailwindcss/defaultTheme");
 
 module.exports = {
   purge: [
@@ -16,6 +17,9 @@ module.exports = {
         sky: colors.sky,
         rose: colors.rose,
         emerald: colors.emerald,
+      },
+      fontFamily: {
+        serif: ["'Inter'", ...defaultTheme.fontFamily.serif],
       },
     },
   },

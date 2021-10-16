@@ -2,8 +2,9 @@ import { GetStaticProps, NextPage } from "next";
 import Head from "next/head";
 import Link from "next/link";
 
-import Navbar from "../components/Navbar";
+import { AUTHOR_FULL_NAME } from "../lib/constants";
 import { getPosts } from "../lib/mdx";
+import { humanizeDate } from "../lib/utils";
 
 type Props = {
   posts: Array<{ frontmatter: Record<string, any>; slug: string }>;
@@ -18,18 +19,33 @@ export const getStaticProps: GetStaticProps = async () => {
 };
 
 const Home: NextPage<Props> = ({ posts }) => {
+  const getPostLink = (slug: string): string => `/posts/${slug}`;
+
   return (
     <>
       <Head>
-        <title>Preet Mishra</title>
+        <title>{AUTHOR_FULL_NAME}</title>
       </Head>
-      <Navbar />
-      <section>
-        {posts.map(({ frontmatter: { title }, slug }, index) => (
-          <h2 key={index}>
-            <Link href={`/posts/${slug}`}>{title}</Link>
-          </h2>
-        ))}
+      <section className="max-w-xl space-y-16 font-serif">
+        {posts.map(
+          (
+            { frontmatter: { title, published, description }, slug },
+            index,
+          ) => (
+            <article key={index} className="flex flex-col space-y-6">
+              <section className="space-y-2">
+                <h2 className="text-2xl font-medium tracking-tight text-gray-900">
+                  <Link href={getPostLink(slug)}>{title}</Link>
+                </h2>
+                <p className="text-sm tracking-wide text-gray-500">
+                  {humanizeDate(published)}
+                </p>
+              </section>
+              <p className="text-gray-700">{description}</p>
+              <Link href={getPostLink(slug)}>Read More</Link>
+            </article>
+          ),
+        )}
       </section>
     </>
   );

@@ -1,15 +1,14 @@
 import { NextPage } from "next";
 import Head from "next/head";
 
-import Navbar from "../components/Navbar";
+import { AUTHOR_FULL_NAME } from "../lib/constants";
 
 const About: NextPage = () => {
   return (
     <>
       <Head>
-        <title>About</title>
+        <title>About {AUTHOR_FULL_NAME}</title>
       </Head>
-      <Navbar />
       <section>
         <h1>About</h1>
         <p>Preet Mishra</p>

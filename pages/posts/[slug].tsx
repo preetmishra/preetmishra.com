@@ -4,8 +4,8 @@ import { ParsedUrlQuery } from "querystring";
 import { GetStaticPaths, GetStaticProps, NextPage } from "next";
 import { getMDXComponent } from "mdx-bundler/client";
 
-import Navbar from "../../components/Navbar";
 import { getPost, getPostSlugs } from "../../lib/mdx";
+import { humanizeDate } from "../../lib/utils";
 
 interface Params extends ParsedUrlQuery {
   slug: string;
@@ -55,9 +55,18 @@ const Post: NextPage<Props> = ({ frontmatter, code }) => {
       <Head>
         <title>{frontmatter.title}</title>
       </Head>
-      <Navbar />
-      <article className="prose">
-        <Component />
+      <article className="space-y-8 font-serif">
+        <section className="space-y-2">
+          <h1 className="text-4xl font-semibold text-gray-900">
+            {frontmatter.title}
+          </h1>
+          <p className="text-gray-500">
+            {humanizeDate(frontmatter.published)}
+          </p>
+        </section>
+        <section className="prose">
+          <Component />
+        </section>
       </article>
     </>
   );
