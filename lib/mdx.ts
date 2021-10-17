@@ -52,7 +52,7 @@ const getPost = async (slug: string) => {
 };
 
 const getPosts = () => {
-  return fs.readdirSync(PATH_POSTS).map((dirname) => {
+  const posts = fs.readdirSync(PATH_POSTS).map((dirname) => {
     const content = getFileContent(dirname);
     const { data: frontmatter } = matter(content);
 
@@ -60,6 +60,12 @@ const getPosts = () => {
       frontmatter,
       slug: dirname,
     };
+  });
+
+  return posts.sort((a, z) => {
+    const aTime = new Date(a.frontmatter.published ?? "").getTime();
+    const zTime = new Date(z.frontmatter.published ?? "").getTime();
+    return aTime > zTime ? -1 : aTime === zTime ? 0 : 1;
   });
 };
 
