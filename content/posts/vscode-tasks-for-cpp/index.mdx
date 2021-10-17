@@ -1,0 +1,66 @@
+---
+title: VSCode Tasks for C++
+published: "26-02-2020"
+description: A lot of times when you are coding, especially when you're trying to work out a solution for a competitive-programming problem, you test and try out different approaches quickly, which requires you to build your code repeatedly. Wouldn't it be better if you could just automate it?
+tags: cpp, competitive-programming, cp, text-editor, vscode
+---
+
+A lot of times when you are coding, especially when you're trying to code your solution for a competitive-programming question, you need to test and try out different approaches that require you to build your code repeatedly.
+This can be time-consuming and tiresome for languages like C/C++. Well, guess what? you can automate this process easily with VSCode tasks.
+
+## What are tasks?
+
+Tasks in VSCode (Visual Studio Code) are these little shortcuts to run commands in your terminal. They can be configured to run scripts and start processes without leaving your editor or writing new code.
+The good thing is that you can map these tasks with custom command keys and they will function just as your default VSCode commands.
+
+## Setting it up
+
+- Hop into your workspace in VScode.
+- Press `Ctrl` + `Shift` + `P` to fire up the command palette, type 'Configure task' and press `enter`.
+- Select 'Create tasks.json file from template', press `enter`, select 'Others' and press `enter`.
+- Replace the contents of the file with the following snippet.
+
+```
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "build & run",
+            "type": "shell",
+            "command": "g++",
+            "args": [
+                "${file}",
+                "&&",
+                "./a.out",
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true,
+            },
+            "presentation": {
+                "reveal": "always",
+                "focus": true,
+                "panel": "new",
+            },
+            "problemMatcher": "$gcc",
+        }
+    ]
+}
+```
+
+## Running it
+
+You can use `Ctrl` + `Shift` + `B` to execute your tasks. However, if you want to bind it to some other key mapping. You can add the following snippet in 'keybindings.json' file and replacing `[your+key+mapping+here]` with the key mapping of your wish.
+
+```
+[
+    {
+        "key": "[your+key+mapping+here]",
+        "command": "workbench.action.tasks.build"
+    },
+]
+```
+
+## Other use cases
+
+You can create tasks for running a server, updating dependencies, running unit tests and other processes.

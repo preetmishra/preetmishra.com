@@ -1,0 +1,96 @@
+---
+title: Getting Started With Vim
+published: "07-10-2019"
+description: Vim (Vi IMproved) is a powerful command-line text editor. With Vim, you rarely have to leave your standard typing position.
+tags: linux, text-editor, vim
+---
+
+Vim (Vi IMproved) is a powerful command-line text editor and as you can already guess, it gives you the ability to edit your files from the command line.
+There are a lot of command-line editors like Nano, Emacs, Pico, but the reason that we are interested in Vim is because of the efficiency that it gives you and its availability.
+With Vim, you rarely have to leave your standard typing position. That’s right, you can navigate through the entire file without using the arrow keys.
+
+## Installation
+
+### Windows
+
+You can download the _.exe_ file from the [official website](https://www.vim.org/download.php).
+
+### Mac
+
+Vim is pre-installed in Mac. To fire it up, enter `vim` in your terminal.
+
+### Linux
+
+Vim can be downloaded from your distribution's package tool. For Ubuntu, you can run the following command in your shell.
+
+```bash
+$ sudo apt-get install vim
+```
+
+## Firing up Vim
+
+To see if the installation was successful, enter the following command in your terminal.
+
+```bash
+$ vim -v
+```
+
+You can type `:q!` to exit.
+
+![version](https://imgur.com/GD8qv3Q.png)
+
+Next, enter the following command to get started with editing.
+
+```bash
+$ vim filename
+```
+
+![filename](https://imgur.com/OfokGUm.png)
+
+## Modes
+
+Unlike any other editor where you directly hop into _insert mode_ whenever you start it, Vim starts with what is called a `normal mode` and to start editing, you need to press **i** to go onto the `insert mode`.
+
+Let's quickly go through the different modes that we have in Vim.
+
+| Mode         | Description                                                                                                                                                                                                                                                                                      |
+| ------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Normal Mode  | As discussed, Vim starts in normal mode by default. In this mode, key presses don’t work as one would expect i.e., they don’t insert text into the file. Normal mode can be accessed from other modes by pressing _Esc_. For starters, this mode can be used for navigations and word movements. |
+| Insert Mode  | In insert mode, typing inserts characters just like a regular text editor. You can go into this mode by pressing _i_.                                                                                                                                                                            |
+| Command Mode | This mode is used for various commands that come with Vim. You can press _:_ from normal mode to go into command mode.                                                                                                                                                                           |
+
+### Editing
+
+To start editing, go into the insert mode from normal mode by pressing _i_. The editing part in Vim is pretty typical and there is nothing much to discuss here.
+
+To **save** the changes made and exit, press _Esc_ to go into the normal mode and then from there press _:_ to go into the command mode followed by wq( You can think of w as write and q as quit).
+If you don't want to save any changes and exit, type _q!_.
+
+![pivot](https://i.imgur.com/qNjWMTo.png)
+
+### Navigation
+
+The last thing that I want to discuss in this beginner-friendly blog is navigation. To navigate through the file, you have to be in the normal mode.
+Refer to the following table to understand how basic key bindings work in Vim.
+
+| Key binding                 | Description                                           |
+| --------------------------- | ----------------------------------------------------- |
+| j                           | Move the cursor down by a line                        |
+| k                           | Move the cursor down by a line                        |
+| h                           | Move the cursor to its left by a character            |
+| k                           | Move the cursor to its right by a character           |
+| 0 or ^                      | Move the cursor to the beginning of the current line  |
+| $                           | Move the cursor to the end of the current line        |
+| w                           | Move the cursor to the beginning of the next word     |
+| e                           | Move the cursor to the end of the current word        |
+| b                           | Move the cursor to the beginning of the previous word |
+| :linenumber or linenumbergg | Move the cursor to the given line number              |
+| Ctrl + f                    | Page down                                             |
+| Ctrl + b                    | Page up                                               |
+
+## Wrapping up
+
+The things I have discussed are pretty basic when it comes to Vim and will help you in getting started.
+Vim, as an editor, is highly configurable and extremely powerful and to take the experience to the next level you can do and customize a lot of things. So feel free to explore and adopt new things as you continue your journey with Vim.
+
+Happy Vimming!
