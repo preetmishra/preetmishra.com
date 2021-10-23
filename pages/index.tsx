@@ -26,7 +26,7 @@ const Home: NextPage<Props> = ({ posts }) => {
       <Head>
         <title>{AUTHOR_FULL_NAME}</title>
       </Head>
-      <section className="max-w-xl space-y-16 font-serif">
+      <section className="space-y-12 font-serif md:space-y-16">
         {posts.map(
           (
             { frontmatter: { title, published, description }, slug },

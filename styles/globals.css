@@ -2,4 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
+#__next {
+  @apply flex flex-col items-center mb-16 space-y-4;
+}
+
 @import "./base.css";
