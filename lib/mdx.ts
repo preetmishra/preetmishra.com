@@ -11,6 +11,13 @@ const FILENAME_INDEX = "index.mdx";
 const PATH_ROOT = process.cwd();
 const PATH_POSTS = path.join(PATH_ROOT, "content/blog");
 
+type Posts = Array<{
+  frontmatter: {
+    [key: string]: any;
+  };
+  slug: string;
+}>;
+
 const getFilePath = (dirname: string) => {
   return path.join(PATH_POSTS, dirname, FILENAME_INDEX);
 };
@@ -51,7 +58,7 @@ const getPost = async (slug: string) => {
   };
 };
 
-const getPosts = () => {
+const getPosts = (): Posts => {
   const posts = fs.readdirSync(PATH_POSTS).map((dirname) => {
     const content = getFileContent(dirname);
     const { data: frontmatter } = matter(content);
@@ -73,4 +80,15 @@ const getPostSlugs = () => {
   return fs.readdirSync(PATH_POSTS);
 };
 
-export { getPost, getPosts, getPostSlugs };
+const getTags = (posts: Posts): Array<string> => {
+  const allTags = new Set<string>();
+
+  for (const post of posts) {
+    const tags: Array<string> = post.frontmatter.tags.split(", ");
+    tags.forEach((tag) => allTags.add(tag));
+  }
+
+  return Array.from(allTags).sort();
+};
+
+export { getPost, getPosts, getPostSlugs, getTags };

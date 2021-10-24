@@ -5,7 +5,8 @@ import { GetStaticPaths, GetStaticProps, NextPage } from "next";
 import { getMDXComponent } from "mdx-bundler/client";
 
 import { getPost, getPostSlugs } from "../../lib/mdx";
-import { humanizeDate } from "../../lib/utils";
+import { humanizeDate, parseTags } from "../../lib/utils";
+import Tags from "../../components/Tags";
 
 interface Params extends ParsedUrlQuery {
   slug: string;
@@ -56,13 +57,20 @@ const Post: NextPage<Props> = ({ frontmatter, code }) => {
         <title>{frontmatter.title}</title>
       </Head>
       <article className="space-y-8 font-serif">
-        <section className="space-y-2">
-          <h1 className="text-4xl font-semibold text-gray-900">
-            {frontmatter.title}
-          </h1>
-          <p className="text-gray-500">
-            {humanizeDate(frontmatter.published)}
-          </p>
+        <section className="space-y-4">
+          <section className="space-y-2">
+            <h1 className="text-4xl font-semibold text-gray-900">
+              {frontmatter.title}
+            </h1>
+            <p className="text-gray-500">
+              {humanizeDate(frontmatter.published)}
+            </p>
+          </section>
+          <Tags
+            tags={parseTags(frontmatter.tags)}
+            shape="rounded"
+            size="small"
+          />
         </section>
         <section className="prose">
           <Component />
