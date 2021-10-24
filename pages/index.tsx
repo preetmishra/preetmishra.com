@@ -19,7 +19,7 @@ export const getStaticProps: GetStaticProps = async () => {
 };
 
 const Home: NextPage<Props> = ({ posts }) => {
-  const getPostLink = (slug: string): string => `/posts/${slug}`;
+  const getPostLink = (slug: string): string => `/blog/${slug}`;
 
   return (
     <>

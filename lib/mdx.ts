@@ -9,7 +9,7 @@ const ENCODING = "utf8";
 const FILENAME_INDEX = "index.mdx";
 
 const PATH_ROOT = process.cwd();
-const PATH_POSTS = path.join(PATH_ROOT, "content/posts");
+const PATH_POSTS = path.join(PATH_ROOT, "content/blog");
 
 const getFilePath = (dirname: string) => {
   return path.join(PATH_POSTS, dirname, FILENAME_INDEX);
