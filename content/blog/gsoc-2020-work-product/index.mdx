@@ -1,0 +1,132 @@
+---
+title: "Work Product: Google Summer of Code 2020 with Zulip"
+published: "08-30-2020"
+description: Over the summer, I worked on Zulip Terminal, Zulip's official terminal client, to bring more feature-parity with the web app. The work revolved around introducing new features, resolving high priority issues, and improving upon its codebase and test suite.
+tags: open-source, python, gsoc, gsoc2020, google-summer-of-code, zulip, zulip-terminal, oss
+---
+
+import Header from "./Header.tsx";
+
+<Header />
+
+I would like to express my sincere gratitude to my mentors, Zulip and Google for an incredible summer.
+
+[Neil Pilgrim](https://github.com/neiljp), [Sumanth V Rao](https://github.com/sumanthvrao) and the [Zulip community](http://chat.zulip.org/): I am eternally grateful for your comprehensive code reviews and constant support. You have helped me become a better software developer and a proactive open-source contributor. This summer was the best summer that I've ever had.
+
+Over the summer, I worked on [Zulip Terminal](https://github.com/zulip/zulip-terminal), Zulip's official terminal client, to bring more feature-parity with the web app. The work revolved around introducing new features, resolving high priority issues, and improving upon its codebase and test suite.
+
+## Project Description
+
+### Title
+
+Bringing Zulip Terminal’s Experience Closer to the Web App.
+
+### Abstract
+
+> Zulip Terminal (zulip-term) is a TUI based Zulip’s client. It targets a niche group of users who like to work primarily from their terminal. For the summer, my goal would be to bring the Zulip Terminal’s experience closer to the web app. At least, to the extent where a user would not have to switch to the web app frequently. In addition to this, the aim would be to improve the code and test suite, test coverage and work on other issues that may come into the picture with the course of time. <sup>[1](https://summerofcode.withgoogle.com/projects/#5393926720061440)</sup>
+
+### Mentors
+
+- [Neil Pilgrim](https://github.com/neiljp)
+- [Sumanth V Rao](https://github.com/sumanthvrao)
+
+### Repository
+
+[zulip/zulip-terminal](https://github.com/zulip/zulip-terminal)
+
+## Work Done
+
+### Summary
+
+- [Preet Mishra's Pull Requests under GSoC: zulip/zulip-terminal](https://github.com/zulip/zulip-terminal/pulls?q=is%3Apr+author%3Apreetmishra+created%3A2020-05-04..2020-08-31+)
+- [Preet Mishra's Issues under GSoC: zulip/zulip-terminal](https://github.com/zulip/zulip-terminal/issues?q=is%3Aissue+author%3Apreetmishra+created%3A2020-05-04..2020-08-31+)
+- [Preet Mishra's Commit History: zulip/zulip-terminal](https://github.com/zulip/zulip-terminal/commits?author=preetmishra)
+
+### Merged Pull Requests
+
+#### [Extract PopUpView to expedite the pop-up creation process](https://github.com/zulip/zulip-terminal/pull/659)
+
+This project was divided into two parts, where the former bit was to extract the common pop-up and the latter was to automate the pop-up height and width calculation. It helped us unify our pop-up style and made introducing new pop-ups easier. Overall, this was a great introduction to structuring commits and proposing code refactors.
+
+#### [Fetch and indicate server version and feature level](https://github.com/zulip/zulip-terminal/pull/653)
+
+With `PopUpView` in place, this was a bit undemanding on its own. However, along with introducing an about menu/pop-up, I worked on extending our `fixture` suite to include a server-version-feature-level fixture.
+
+#### [Show in-line message links as footlinks](https://github.com/zulip/zulip-terminal/pull/703)
+
+This project was to improve message readability in the application. I worked on extracting in-line message links from the message content, trimming the link text and showing the links as footlinks. I was thrilled to get this in! I followed up on the work with two more pull requests.
+
+- [Support footlinks configuration via zuliprc](https://github.com/zulip/zulip-terminal/pull/735): Given that we already had links available in the `MsgInfoView` post [2d58784](https://github.com/zulip/zulip-terminal/commit/2d587840c48e3f69142083cd50fc6b883b2f2f43), this follow-up was to support footlinks configuration via `zuliprc`.
+- [Delegate link text for raw links in a better way](https://github.com/zulip/zulip-terminal/pull/750): Here, I worked on improving the link text prediction for raw links to further improve message legibility in the application.
+
+#### [Support API migration for muted topics](https://github.com/zulip/zulip-terminal/pull/744)
+
+This was to reflect the expected response change for `muted_topics`, from `[stream_name, topic]` to `[stream_name, topic, date_muted]`, in Zulip version 3.0, feature level 1. Additionally, it included a couple of refactor commits to encapsulate sensitive muted topics data.
+
+#### [Fetch topics on demand to prevent heavy load on /topics](https://github.com/zulip/zulip-terminal/pull/759)
+
+This was a high priority fix, where I worked on reducing heavy load on the `/topics` endpoint by fetching topics on demand. Consequently, it helped us reduce our application startup time and encapsulate the topics `index`.
+
+#### [Markup timezone-aware time mentions](https://github.com/zulip/zulip-terminal/pull/765)
+
+Here, I worked on adding support for rendering timezone-aware time mentions in the application. I spent my time trying out different Python libraries to work out what we needed. I followed up on the work with another pull request.
+
+- [Show time mentions and their source text in MsgInfoView](https://github.com/zulip/zulip-terminal/pull/771): I worked on logging time mentions and eventually showing them in the `MsgInfoView` as an extension.
+
+#### [Do not mark as read on search narrows](https://github.com/zulip/zulip-terminal/pull/723)
+
+While the actual implementation turned out to be rather straightforward, I learned a great deal about how Zulip Terminal handles search narrows, updating messages, and marking messages as read locally. I followed up on the work with a quick pull request.
+
+- [Add an explore mode to run the app without marking messages as read](https://github.com/zulip/zulip-terminal/pull/787): Here, I worked on introducing an explore mode where messages are not marked read intentionally as an addition to our existing command-line options.
+
+#### [Handle internal links](https://github.com/zulip/zulip-terminal/pull/708)
+
+This project was to handle cross-referencing internal links within the application, a missing feature that our end-users need the web app for. I worked on parsing, decoding and validating narrow URLs, and handling narrows using our narrow methods. I was keen to get this in!
+
+#### [Visually separate pinned and unpinned streams while searching](https://github.com/zulip/zulip-terminal/pull/705)
+
+This was a pretty straightforward visual cue to the [stream search and suggestion work](https://github.com/zulip/zulip-terminal/pull/530) that I started before GSoC and concluded amidst GSoC.
+
+#### [Avoid empty searches via PanelSearchBox](https://github.com/zulip/zulip-terminal/pull/700)
+
+This was more of a small side project, where we also discovered a bug related to the user search. The bugfix was merged recently and the pull request was halted to move ahead with another alternative to better address the original issue.
+
+#### Minor Documentation Changes
+
+- [Specify low priority for mouse support.](https://github.com/zulip/zulip-terminal/pull/668)
+- [Amend hotkeys section to remove obsolete context.](https://github.com/zulip/zulip-terminal/pull/713)
+- [Update obsolete relative links in getting-started.md.](https://github.com/zulip/zulip-terminal/pull/734)
+
+### Open Pull Requests
+
+#### [Add support for edit history](https://github.com/zulip/zulip-terminal/pull/663)
+
+Here, I worked on fetching message edit history via Zulip's REST API and rendering it in a pop-up. It was intriguing to work around the inconsistency in the fetched data. The pull request has had a few review iterations and is very close to merging.
+
+#### [Add support for viewing a message in the web browser](https://github.com/zulip/zulip-terminal/pull/698)
+
+This started as a reviving project and was later followed by narrow improvement. I spent my time digging up the server code to figure out how message links are generated and porting it to our codebase.
+
+#### [Unify case sensitive topic names](https://github.com/zulip/zulip-terminal/pull/733)
+
+This led me to dig deeper into the codebase and understand how different components in the application work together. Along with the in-app model, it also led me to explore Zulip's REST API thoroughly. I spent my fair share of time figuring out a clean way to unify case sensitive topic names locally.
+
+#### [Handle media links](https://github.com/zulip/zulip-terminal/pull/740)
+
+This project was about adding support media links in the application, another missing feature that our end-users the web app for. I worked on reviving an existing pull request and extending it to let users access any sort of media without leaving the application.
+
+#### [Markup markdown text in stream description](https://github.com/zulip/zulip-terminal/pull/749)
+
+While the ultimate intent was to markup the stream description, I initially worked on decoupling our markup methods from `MessageBox` and extending the `footlinks_view()` to facilitate code reusability.
+
+## Future Work
+
+While we track hundreds of issues that could potentially polish Zulip Terminal further, there will always be plenty of elements to improve upon. In the coming weeks, I will be working on supporting [spoilers](https://github.com/zulip/zulip-terminal/issues/688), handling [PM narrow and external links](https://github.com/zulip/zulip-terminal/issues/764), and concluding [my outstanding pull requests](https://github.com/zulip/zulip-terminal/pulls/preetmishra).
+
+## Closing Notes
+
+In the past months, I have learned a great deal about reading others' work, writing clean code and reliable unit tests, and putting up comprehensible pull requests.
+
+Personally, it has always been a pleasure to help others and review their code. I have had the opportunity to review a couple of pull requests over the summer: [Preet Mishra's Reviewed Pull Requests: zulip/zulip-terminal](https://github.com/zulip/zulip-terminal/pulls?q=is%3Apr+is%3Aopen+reviewed-by%3Apreetmishra).
+
+Contributing to Zulip has been the most exciting way to learn about software development. Moreover, it is always delightful to see your work being used in production. I would continue contributing to the project and helping other potential contributors getting started with Zulip and open-source to the best of my ability.
