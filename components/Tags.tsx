@@ -4,12 +4,14 @@ import { useRouter } from "next/router";
 import { ROUTE_BLOG } from "../lib/routes";
 
 type Props = {
+  className?: string;
   tags: Array<string>;
   shape: "pill" | "rounded";
   size?: "default" | "small";
 };
 
 const Tags: FunctionComponent<Props> = ({
+  className,
   tags,
   shape,
   size = "default",
@@ -26,7 +28,12 @@ const Tags: FunctionComponent<Props> = ({
   };
 
   return (
-    <section className="flex flex-row flex-wrap gap-2">
+    <section
+      className={
+        "flex flex-row flex-wrap gap-2" +
+        (className ? " " + className : "")
+      }
+    >
       {tags.map((tag, index) => (
         <button
           key={index}

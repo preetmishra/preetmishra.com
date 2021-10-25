@@ -6,7 +6,7 @@ import { ROUTE_ABOUT, ROUTE_BLOG } from "../lib/routes";
 
 const Navbar: FunctionComponent = () => {
   return (
-    <nav className="sticky top-0 z-50 flex justify-center w-full py-4 font-serif bg-white md:py-8 backdrop-filter backdrop-blur-md bg-opacity-80">
+    <nav className="sticky top-0 z-50 flex justify-center w-full py-4 font-serif bg-white md:py-6 filter drop-shadow-sm">
       <div className="flex justify-between w-full px-4 md:max-w-2xl md:px-8">
         <h1 className="tracking-wider">
           <Link href={ROUTE_BLOG}>{AUTHOR_FULL_NAME}</Link>

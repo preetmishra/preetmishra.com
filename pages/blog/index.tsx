@@ -65,69 +65,31 @@ const Posts: NextPage<Props> = ({ posts, tags }) => {
       <Head>
         <title>{`${AUTHOR_FULL_NAME}'s Blog`}</title>
       </Head>
-      <section
-        className={
-          "flex flex-col font-serif" +
-          (tag || shouldShowTags ? " space-y-8" : " space-y-4")
-        }
-      >
-        <section className="space-y-4">
-          {tag ? (
-            <section className="flex flex-row items-center justify-between w-full px-4 py-2 space-x-4 tracking-wide text-gray-500 bg-gray-100 border border-gray-100 rounded-md">
-              <p>
-                Showing results for <b>{tag}</b>
-              </p>
-              <button onClick={resetFilter}>
-                <SolidCross className="w-4 h-4 text-gray-500 hover:text-gray-900" />
-              </button>
-            </section>
-          ) : (
-            <button
-              className="flex flex-row items-center space-x-2 tracking-wide text-gray-500 hover:text-gray-900 group"
-              onClick={() => setShouldShowTags((state) => !state)}
-            >
-              <span>Filter posts by topic</span>
-              <span>
-                <OutlineChevronRight
-                  className={
-                    "w-4 h-4 transform rotate-90 transition duration-200 ease-linear text-gray-500 group-hover:text-gray-900" +
-                    (shouldShowTags ? " -rotate-90" : "")
-                  }
-                />
-              </span>
+      <section className="flex flex-col space-y-8 font-serif">
+        {tag && (
+          <section className="flex flex-row items-center justify-between w-full px-4 py-2 space-x-4 tracking-wide text-gray-500 bg-gray-100 border border-gray-100 rounded-md">
+            <p>
+              Showing results for <b>{tag}</b>
+            </p>
+            <button onClick={resetFilter}>
+              <SolidCross className="w-4 h-4 text-gray-500 hover:text-gray-900" />
             </button>
-          )}
-          {shouldShowTags && !tag && <Tags tags={tags} shape="pill" />}
-        </section>
+          </section>
+        )}
         <section className="space-y-12 md:space-y-16">
           {filteredPosts.map(
             (
-              {
-                frontmatter: {
-                  title,
-                  published,
-                  description,
-                  tags: postTags,
-                },
-                slug,
-              },
+              { frontmatter: { title, published, description }, slug },
               index,
             ) => (
-              <article key={index} className="flex flex-col space-y-6">
-                <section className="space-y-4">
-                  <section className="space-y-2">
-                    <h2 className="text-2xl font-medium tracking-tight text-gray-900">
-                      <Link href={getPostLink(slug)}>{title}</Link>
-                    </h2>
-                    <p className="text-sm tracking-wide text-gray-500">
-                      {humanizeDate(published)}
-                    </p>
-                  </section>
-                  <Tags
-                    tags={parseTags(postTags)}
-                    shape="rounded"
-                    size="small"
-                  />
+              <article key={index} className="flex flex-col space-y-4">
+                <section className="space-y-2">
+                  <h2 className="text-2xl font-medium tracking-tight text-gray-900">
+                    <Link href={getPostLink(slug)}>{title}</Link>
+                  </h2>
+                  <p className="text-sm tracking-wide text-gray-500">
+                    {humanizeDate(published)}
+                  </p>
                 </section>
                 <p className="text-gray-700">{description}</p>
                 <Link href={getPostLink(slug)}>Read More</Link>
