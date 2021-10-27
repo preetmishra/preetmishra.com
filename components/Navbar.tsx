@@ -34,7 +34,7 @@ const Navbar: FunctionComponent = () => {
 
   return (
     <nav className="sticky top-0 z-50 flex justify-center w-full py-4 font-serif bg-white md:py-6 filter drop-shadow-sm">
-      <div className="flex items-center justify-between w-full px-4 space-x-8 md:max-w-2xl md:px-8">
+      <div className="flex items-center justify-between w-full px-4 space-x-4 md:space-x-8 md:max-w-2xl md:px-8">
         <h1 className="flex-none text-2xl font-medium tracking-tighter text-gray-900 lowercase md:-ml-1">
           <Link href={ROUTE_BLOG}>
             <a aria-label={AUTHOR_FULL_NAME} title={AUTHOR_FULL_NAME}>
@@ -42,7 +42,7 @@ const Navbar: FunctionComponent = () => {
             </a>
           </Link>
         </h1>
-        <ul className="flex flex-wrap font-medium tracking-tight text-gray-400 gap-x-2 md:gap-x-4">
+        <ul className="flex flex-wrap font-medium tracking-tight text-gray-400 gap-x-4">
           {NAV_LINKS.map(({ path, label }, index) => (
             <li key={index}>
               <Link href={path}>
