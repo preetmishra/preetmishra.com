@@ -63,7 +63,7 @@ const Posts: NextPage<Props> = ({ posts, tags }) => {
   return (
     <>
       <Head>
-        <title>{`${AUTHOR_FULL_NAME}'s Blog`}</title>
+        <title>{`The ${AUTHOR_FULL_NAME} Blog`}</title>
       </Head>
       <section className="flex flex-col space-y-8 font-serif">
         {tag && (
