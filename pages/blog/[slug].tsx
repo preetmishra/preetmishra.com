@@ -57,12 +57,12 @@ const Post: NextPage<Props> = ({ frontmatter, code }) => {
         <title>{frontmatter.title}</title>
       </Head>
       <article className="space-y-8 font-serif">
-        <section className="space-y-4">
+        <section className="space-y-6">
           <section className="space-y-2">
             <h1 className="text-4xl font-bold tracking-tight text-gray-900">
               {frontmatter.title}
             </h1>
-            <p className="text-gray-500">
+            <p className="tracking-tight text-gray-500">
               {humanizeDate(frontmatter.published)}
             </p>
           </section>
