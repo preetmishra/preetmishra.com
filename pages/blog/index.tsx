@@ -4,17 +4,14 @@ import { GetStaticProps, NextPage } from "next";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 
-import { getPosts, getTags } from "../../lib/mdx";
+import { getPosts } from "../../lib/mdx";
 import { humanizeDate, parseTags } from "../../lib/utils";
 import { AUTHOR_FULL_NAME } from "../../lib/constants";
-import Tags from "../../components/Tags";
-import OutlineChevronRight from "../../components/icons/OutlineChevronRight";
 import SolidCross from "../../components/icons/SolidCross";
 import { ROUTE_BLOG } from "../../lib/routes";
 
 type Props = {
   posts: Array<{ frontmatter: Record<string, any>; slug: string }>;
-  tags: Array<string>;
 };
 
 export const getStaticProps: GetStaticProps = async () => {
@@ -23,13 +20,11 @@ export const getStaticProps: GetStaticProps = async () => {
   return {
     props: {
       posts: posts,
-      tags: getTags(posts),
     },
   };
 };
 
-const Posts: NextPage<Props> = ({ posts, tags }) => {
-  const [shouldShowTags, setShouldShowTags] = useState(false);
+const Posts: NextPage<Props> = ({ posts }) => {
   const [filteredPosts, setFilteredPosts] = useState(posts);
 
   const router = useRouter();
@@ -53,7 +48,6 @@ const Posts: NextPage<Props> = ({ posts, tags }) => {
   const getPostLink = (slug: string): string => `/blog/${slug}`;
 
   const resetFilter = () => {
-    setShouldShowTags(false);
     router.push({
       pathname: ROUTE_BLOG,
       query: {},
@@ -76,7 +70,7 @@ const Posts: NextPage<Props> = ({ posts, tags }) => {
             </button>
           </section>
         )}
-        <section className="space-y-12 md:space-y-16">
+        <section className="space-y-12">
           {filteredPosts.map(
             (
               { frontmatter: { title, published, description }, slug },
@@ -84,7 +78,7 @@ const Posts: NextPage<Props> = ({ posts, tags }) => {
             ) => (
               <article key={index} className="flex flex-col space-y-4">
                 <section className="space-y-2">
-                  <h2 className="text-2xl font-medium tracking-tight text-gray-900">
+                  <h2 className="text-2xl font-medium text-gray-900">
                     <Link href={getPostLink(slug)}>{title}</Link>
                   </h2>
                   <p className="text-sm tracking-wide text-gray-500">

@@ -42,7 +42,7 @@ const Navbar: FunctionComponent = () => {
             </a>
           </Link>
         </h1>
-        <ul className="flex flex-wrap font-medium tracking-tight text-gray-400 gap-x-4">
+        <ul className="flex flex-wrap font-medium text-gray-400 gap-x-4">
           {NAV_LINKS.map(({ path, label }, index) => (
             <li key={index}>
               <Link href={path}>
