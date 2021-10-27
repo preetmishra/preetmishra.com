@@ -59,7 +59,7 @@ const Post: NextPage<Props> = ({ frontmatter, code }) => {
       <article className="space-y-8 font-serif">
         <section className="space-y-4">
           <section className="space-y-2">
-            <h1 className="text-4xl font-semibold text-gray-900">
+            <h1 className="text-4xl font-bold tracking-tight text-gray-900">
               {frontmatter.title}
             </h1>
             <p className="text-gray-500">

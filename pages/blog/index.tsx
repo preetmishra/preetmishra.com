@@ -78,15 +78,17 @@ const Posts: NextPage<Props> = ({ posts }) => {
             ) => (
               <article key={index} className="flex flex-col space-y-4">
                 <section className="space-y-2">
-                  <h2 className="text-2xl font-medium text-gray-900">
+                  <h2 className="text-2xl font-medium tracking-tight text-gray-900">
                     <Link href={getPostLink(slug)}>{title}</Link>
                   </h2>
-                  <p className="text-sm tracking-wide text-gray-500">
+                  <p className="text-sm text-gray-500">
                     {humanizeDate(published)}
                   </p>
                 </section>
-                <p className="text-gray-700">{description}</p>
-                <Link href={getPostLink(slug)}>Read More</Link>
+                <p className="text-gray-600">{description}</p>
+                <Link href={getPostLink(slug)}>
+                  <a className="block">Read More</a>
+                </Link>
               </article>
             ),
           )}
