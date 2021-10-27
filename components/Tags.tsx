@@ -40,7 +40,7 @@ const Tags: FunctionComponent<Props> = ({
           name={tag}
           onClick={pushFilter}
           className={
-            "bg-gray-100 border border-gray-100 text-gray-700 hover:bg-gray-200 hover:text-gray-900 text-sm tracking-wide" +
+            "bg-gray-100 border border-gray-100 text-gray-500 focus:bg-gray-900 focus:border-gray-900 focus:text-white hover:bg-gray-900 hover:border-gray-900 hover:text-white text-sm" +
             (shape === "pill" ? " rounded-full" : "") +
             (shape === "rounded" ? " rounded-md" : "") +
             (size === "default" ? " px-4 py-2" : "") +
