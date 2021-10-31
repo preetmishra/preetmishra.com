@@ -1,0 +1,131 @@
+---
+title: Autoscaling Jibri Containers on AWS
+published: "07-29-2021"
+description: How I architected a system to scale out and scale in Jibri containers on AWS dynamically.
+tags: aws, autoscaling, jitsi, jitsi-meet, jibri, docker, docker-swarm
+---
+
+While it may come off as somewhat of a niche read, I believe this would potentially help you think about scaling any system in general.
+
+First things first, when I was presented with the problem, I did not have much experience with architecting. Like any other true startup software engineer, I began reading through online forums. Thanks to the amazing people at the [Jitsi Community Forum](https://community.jitsi.org/), I did end up finding bits and pieces of how one would go about architecting a sytem like this.
+
+## Some Background
+
+[Jibri](https://github.com/jitsi/jibri) is a recording and streaming service for Jitsi. [Jitsi](https://github.com/jitsi) is a free, open-source, out-of-the-box video conferencing solution.
+
+## The Plan
+
+The plan was straightforward.
+
+As a single Jibri container could only record or stream one meet at a time, I intended to maintain a particular number of Jibri containers in the pool at any time. (For reference, let's call that `JIBRIS_THRESHOLD`.)
+
+In addtion, the plan was to:
+
+- Scale out as soon as the number of available Jibri containers in the pool drops below the `JIBRIS_THRESHOLD`.
+- Scale in whenever that number is more than the `JIBRIS_THRESHOLD` **and** the Jibri containers have been IDLE for some time. (For reference, let's call that wait time `IDLE_COUNT_THRESHOLD`.)
+
+## The Setup
+
+I used an Auto Scaling Group (ASG) to provision and shut down instances as required. The ASG had all the instances with “Scale In Protection” as I did not want the ASG to handle the scale in (the ASG did not know which Jibri is currently IDLE or BUSY and could have potentially scaled in an active/BUSY Jibri). In addtion, I setup Simple Scaling Policies to provision and termiante instances.
+
+In essence, the ASG listened for its CloudWatch alarms to add or remove instances accordingly.
+
+### CloudWatch Alarms
+
+I setup two alarms for scaling in and scaling out instances based on a custom metric.
+
+- The scale in alarm was meant to be triggered whenever the number of Jibri containers were more than the `JIBRIS_THRESHOLD` or if the data was missing.
+- The scale out alarm was meant to be triggered whenever the number of Jibri containers were less than the `JIBRIS_THRESHOLD`.
+
+### Custom CloudWatch Metric
+
+I setup a process to montior the number of available Jibri containers to the Jitsi’s Jicofo component and send a metric to CloudWatch whenever they were less than the `JIBRIS_THRESHOLD`.
+
+This was an important part of the setup! This arrangment forced the scale in alarm to always be in an “In Alarm” state and thus asked the ASG to scale in instances as soon as their “Scale In Protection” was removed. In addition, it asked the ASG to scale out whenever the scale out alarm was in an “In Alarm” state.
+
+## Scaling
+
+### Scale Out
+
+I wrote a script to monitor the number of available/IDLE Jibri containers on the Jitsi’s server every 10 seconds. Whenever they were less than the `JIBRIS_THRESHOLD`, an scale out alarm on CloudWatch was set to a “In Alarm” state which in turn asked the ASG to provision another instance. The scale out activity took about 3 minutes.
+
+```bash
+#!/bin/bash
+
+THRESHOLD=1
+ALERT_COOLDOWN=400
+AVAILABLE_JIBRIS=$(curl -s http://127.0.0.1:8888/stats | jq '.jibri_detector.available')
+
+while :
+do
+  if [[ $AVAILABLE_JIBRIS -lt $THRESHOLD ]]
+  then
+    aws cloudwatch put-metric-data --metric-name JibriAvailableCount --namespace SomeApp --value 0
+    sleep $ALERT_COOLDOWN
+  fi
+  sleep 10
+done
+```
+
+### Scale In
+
+I setup a cron job to run every minute on every Jibri container to monitor whether the Jibri had been IDLE for `IDLE_COUNT_THRESHOLD`. If it had and the number of available Jibri containers were more than the `JIBRIS_THRESHOLD`, the Jibri container would disconnect from the Jitsi server and remove the “Scale In Protection”. As the scale in alarm was always active for this case, the ASG terminated the machine instantly.
+
+```bash
+#!/bin/bash
+
+# NOTE: Requires IDLE_COUNT_THRESHOLD, JICOFO_IP_PORT & JIBRIS_THRESHOLD as environment variables.
+
+STATE_FILE="/home/ubuntu/.jibri-state-file"
+
+declare -i idle_count
+
+# If the state file exists, read the variable value from it.
+if [ -f "$STATE_FILE" ]
+then
+  read -r idle_count < "$STATE_FILE"
+else
+  idle_count=0
+fi
+
+# Increase idle count if IDLE.
+JIBRI_STATUS=$(curl -s http://127.0.0.1:2222/jibri/api/v1.0/health | jq .status.busyStatus | tr -d '"')
+if [ "$JIBRI_STATUS" == "IDLE" ]
+then
+   idle_count="$((idle_count + 1))"
+else
+   # Reset if found busy in between.
+   idle_count="0"
+fi
+
+# Kill the instance if threshold reached.
+if [ $idle_count -eq $IDLE_COUNT_THRESHOLD ]
+then
+   echo "THRESHOLD REACHED!"
+   printf '%d\n' "0" > "$STATE_FILE"
+
+   available_jibris=$(curl -s $JICOFO_IP_PORT/stats | jq '.jibri_detector.available')
+   if [ $available_jibris -eq $JIBRIS_THRESHOLD ]
+   then
+     echo "Not terminating any instance as number of available Jibris are required as per the JIBRIS_THRESHOLD ($JIBRIS_THRESHOLD)"
+   else
+     echo "Terminating the instance!"
+     sudo docker-compose -f /mnt/jibri/docker-compose.yml down
+     sudo docker swarm leave
+     instance_id=$(curl -s http://111.222.333.444/latest/meta-data/instance-id)
+      /usr/local/bin/aws autoscaling set-instance-protection --instance-ids $instance_id --auto-scaling-group-name "asg-jibri" --no-protected-from-scale-in
+   fi
+else
+   echo "OK!"
+   # Save the variable in the state file.
+   printf '%d\n' "$idle_count" > "$STATE_FILE"
+fi
+```
+
+## Uploading Recordings to AWS S3
+
+Jibri accepts a finalize script that runs whenever a meet ends. I used this script to upload the recoding to an S3 bucket. Fortunately, this kept the Jibri BUSY while uploading, allowing us to be aware and not kill the instance while the file is being uploaded!
+
+## Closing Thoughts
+
+There is a still a room for improvement in the system. While being able to autoscale dynamically, it is not truly on-demand. As an improvement, the number of meetings could be guesstimated every 5 minutes and the system could try to maintain that many containers in the pool.
