@@ -6,6 +6,7 @@ import Document, {
   DocumentInitialProps,
   DocumentContext,
 } from "next/document";
+import { AUTHOR_FULL_NAME } from "../lib/constants";
 
 class CustomDocument extends Document {
   static async getInitialProps(
@@ -20,6 +21,7 @@ class CustomDocument extends Document {
       <Html>
         <Head>
           <link rel="icon" href="/favicon.ico" />
+          <meta property="og:site_name" content={AUTHOR_FULL_NAME} />
         </Head>
         <body>
           <Main />

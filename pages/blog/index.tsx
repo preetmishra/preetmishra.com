@@ -6,9 +6,15 @@ import { useEffect, useState } from "react";
 
 import { getPosts } from "../../lib/mdx";
 import { humanizeDate, parseTags } from "../../lib/utils";
-import { AUTHOR_FULL_NAME } from "../../lib/constants";
+import {
+  AUTHOR_FULL_NAME,
+  AUTHOR_TWITTER_HANDLE,
+} from "../../lib/constants";
 import SolidCross from "../../components/icons/SolidCross";
 import { ROUTE_BLOG } from "../../lib/routes";
+
+const TITLE = `The ${AUTHOR_FULL_NAME} Blog`;
+const DESCRIPTION = `Join ${AUTHOR_FULL_NAME} as he navigates through his personal and work life.`;
 
 type Props = {
   posts: Array<{ frontmatter: Record<string, any>; slug: string }>;
@@ -57,7 +63,19 @@ const Posts: NextPage<Props> = ({ posts }) => {
   return (
     <>
       <Head>
-        <title>{`The ${AUTHOR_FULL_NAME} Blog`}</title>
+        <title>{TITLE}</title>
+        <meta name="description" content={DESCRIPTION} />
+
+        <meta property="og:title" content={TITLE} />
+        <meta property="og:description" content={DESCRIPTION} />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://preetmishra.com" />
+
+        <meta name="twitter:card" content="summary" />
+        <meta name="twitter:site" content={AUTHOR_TWITTER_HANDLE} />
+        <meta name="twitter:creator" content={AUTHOR_TWITTER_HANDLE} />
+        <meta name="twitter:title" content={TITLE} />
+        <meta name="twitter:description" content={DESCRIPTION} />
       </Head>
       <section className="flex flex-col space-y-8 font-serif">
         {tag && (

@@ -2,6 +2,7 @@ export const AUTHOR_FIRST_NAME = "Preet";
 export const AUTHOR_LAST_NAME = "Mishra";
 export const AUTHOR_FULL_NAME =
   AUTHOR_FIRST_NAME + " " + AUTHOR_LAST_NAME;
+export const AUTHOR_TWITTER_HANDLE = "@wickedmishra";
 
 export const SUFFIX_DAY: Record<string, string> = {
   1: "st",

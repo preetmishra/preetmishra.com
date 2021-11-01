@@ -6,7 +6,14 @@ import ExternalLinkWithIcon from "../components/ExternalLinkWithIcon";
 import GitHub from "../components/icons/GitHub";
 import LinkedIn from "../components/icons/LinkedIn";
 import Twitter from "../components/icons/Twitter";
-import { AUTHOR_FIRST_NAME, AUTHOR_FULL_NAME } from "../lib/constants";
+import {
+  AUTHOR_FIRST_NAME,
+  AUTHOR_FULL_NAME,
+  AUTHOR_TWITTER_HANDLE,
+} from "../lib/constants";
+
+const TITLE = `About ${AUTHOR_FULL_NAME}`;
+const DESCRIPTION = `Know more about ${AUTHOR_FULL_NAME}.`;
 
 const ExternalLinks: FunctionComponent = () => {
   const UTILITY_EXTERNAL_LINKS =
@@ -34,7 +41,22 @@ const About: NextPage = () => {
   return (
     <>
       <Head>
-        <title>About {AUTHOR_FULL_NAME}</title>
+        <title>{TITLE}</title>
+        <meta name="description" content={DESCRIPTION} />
+
+        <meta property="og:title" content={TITLE} />
+        <meta property="og:description" content={DESCRIPTION} />
+        <meta property="og:type" content="website" />
+        <meta
+          property="og:url"
+          content="https://preetmishra.com/about"
+        />
+
+        <meta name="twitter:card" content="summary" />
+        <meta name="twitter:site" content={AUTHOR_TWITTER_HANDLE} />
+        <meta name="twitter:creator" content={AUTHOR_TWITTER_HANDLE} />
+        <meta name="twitter:title" content={TITLE} />
+        <meta name="twitter:description" content={DESCRIPTION} />
       </Head>
       <section className="flex flex-col-reverse space-y-8 space-y-reverse font-serif md:justify-between md:flex-row md:space-y-0">
         <section className="flex flex-col justify-between space-y-6 md:space-y-8">

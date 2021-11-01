@@ -13,7 +13,10 @@ import {
 } from "../../lib/utils";
 import Tags from "../../components/Tags";
 import { ROUTE_ABOUT } from "../../lib/routes";
-import { AUTHOR_FULL_NAME } from "../../lib/constants";
+import {
+  AUTHOR_FULL_NAME,
+  AUTHOR_TWITTER_HANDLE,
+} from "../../lib/constants";
 
 interface Params extends ParsedUrlQuery {
   slug: string;
@@ -22,6 +25,7 @@ interface Params extends ParsedUrlQuery {
 type Props = {
   frontmatter: Record<string, any>;
   code: string;
+  slug: string;
 };
 
 export const getStaticPaths: GetStaticPaths<Params> = async () => {
@@ -51,28 +55,46 @@ export const getStaticProps: GetStaticProps<Props, Params> = async ({
   return {
     props: {
       ...(await getPost(slug)),
+      slug,
     },
   };
 };
 
-const Post: NextPage<Props> = ({ frontmatter, code }) => {
+const Post: NextPage<Props> = ({ frontmatter, code, slug }) => {
+  const { title, description, published, tags } = frontmatter;
+
   const Component = useMemo(() => getMDXComponent(code), [code]);
 
   return (
     <>
       <Head>
-        <title>{frontmatter.title}</title>
+        <title>{title}</title>
+        <meta name="description" content={description} />
+
+        <meta property="og:title" content={title} />
+        <meta property="og:description" content={description} />
+        <meta property="og:type" content="article" />
+        <meta
+          property="og:url"
+          content={`https://preetmishra.com/blog/${slug}`}
+        />
+
+        <meta name="twitter:card" content="summary" />
+        <meta name="twitter:site" content={AUTHOR_TWITTER_HANDLE} />
+        <meta name="twitter:creator" content={AUTHOR_TWITTER_HANDLE} />
+        <meta name="twitter:title" content={title} />
+        <meta name="twitter:description" content={description} />
       </Head>
       <article className="space-y-8 font-serif">
         <header className="space-y-6">
           <section className="space-y-2">
             <h1 className="text-4xl font-bold tracking-tight text-gray-900">
-              {frontmatter.title}
+              {title}
             </h1>
             <p className="text-gray-500">
               <span className="mr-1 sr-only">Posted on</span>
-              <time dateTime={toHTMLDateTime(frontmatter.published)}>
-                {humanizeDate(frontmatter.published)}
+              <time dateTime={toHTMLDateTime(published)}>
+                {humanizeDate(published)}
               </time>
               <span className="ml-1 sr-only">by</span>
               <Link href={ROUTE_ABOUT}>
@@ -82,11 +104,7 @@ const Post: NextPage<Props> = ({ frontmatter, code }) => {
               </Link>
             </p>
           </section>
-          <Tags
-            tags={parseTags(frontmatter.tags)}
-            shape="rounded"
-            size="small"
-          />
+          <Tags tags={parseTags(tags)} shape="rounded" size="small" />
         </header>
         <section className="prose">
           <Component />
