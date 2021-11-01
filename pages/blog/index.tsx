@@ -14,7 +14,7 @@ import SolidCross from "../../components/icons/SolidCross";
 import { ROUTE_BLOG } from "../../lib/routes";
 
 const TITLE = `The ${AUTHOR_FULL_NAME} Blog`;
-const DESCRIPTION = `Join ${AUTHOR_FULL_NAME} as he navigates through his personal and work life.`;
+const DESCRIPTION = `Join ${AUTHOR_FULL_NAME} as he navigates through his personal and professional life.`;
 
 type Props = {
   posts: Array<{ frontmatter: Record<string, any>; slug: string }>;
