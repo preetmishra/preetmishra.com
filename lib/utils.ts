@@ -13,8 +13,13 @@ const humanizeDate = (date: string): string => {
   return `${verboseDay} ${verboseMonth}, ${year}`;
 };
 
+const toHTMLDateTime = (date: string): string => {
+  const [month, day, year] = date.split("-");
+  return `${year}-${month}-${day}`;
+};
+
 const parseTags = (tags: string): Array<string> => {
   return tags.split(", ").sort();
 };
 
-export { humanizeDate, parseTags };
+export { humanizeDate, parseTags, toHTMLDateTime };

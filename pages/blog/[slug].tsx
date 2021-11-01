@@ -1,12 +1,19 @@
 import { useMemo } from "react";
 import Head from "next/head";
+import Link from "next/link";
 import { ParsedUrlQuery } from "querystring";
 import { GetStaticPaths, GetStaticProps, NextPage } from "next";
 import { getMDXComponent } from "mdx-bundler/client";
 
 import { getPost, getPostSlugs } from "../../lib/mdx";
-import { humanizeDate, parseTags } from "../../lib/utils";
+import {
+  humanizeDate,
+  parseTags,
+  toHTMLDateTime,
+} from "../../lib/utils";
 import Tags from "../../components/Tags";
+import { ROUTE_ABOUT } from "../../lib/routes";
+import { AUTHOR_FULL_NAME } from "../../lib/constants";
 
 interface Params extends ParsedUrlQuery {
   slug: string;
@@ -57,13 +64,22 @@ const Post: NextPage<Props> = ({ frontmatter, code }) => {
         <title>{frontmatter.title}</title>
       </Head>
       <article className="space-y-8 font-serif">
-        <section className="space-y-6">
+        <header className="space-y-6">
           <section className="space-y-2">
             <h1 className="text-4xl font-bold tracking-tight text-gray-900">
               {frontmatter.title}
             </h1>
-            <p className="tracking-tight text-gray-500">
-              {humanizeDate(frontmatter.published)}
+            <p className="text-gray-500">
+              <span className="mr-1 sr-only">Posted on</span>
+              <time dateTime={toHTMLDateTime(frontmatter.published)}>
+                {humanizeDate(frontmatter.published)}
+              </time>
+              <span className="ml-1 sr-only">by</span>
+              <Link href={ROUTE_ABOUT}>
+                <a rel="author" className="ml-1 sr-only">
+                  {AUTHOR_FULL_NAME}
+                </a>
+              </Link>
             </p>
           </section>
           <Tags
@@ -71,7 +87,7 @@ const Post: NextPage<Props> = ({ frontmatter, code }) => {
             shape="rounded"
             size="small"
           />
-        </section>
+        </header>
         <section className="prose">
           <Component />
         </section>
