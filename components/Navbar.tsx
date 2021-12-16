@@ -33,7 +33,7 @@ const Navbar: FunctionComponent = () => {
   };
 
   return (
-    <nav className="sticky top-0 z-50 flex justify-center w-full py-4 font-serif bg-white md:py-6 filter drop-shadow-sm">
+    <nav className="sticky top-0 z-50 flex justify-center w-full py-4 font-serif bg-white md:py-6 drop-shadow-sm">
       <div className="flex items-center justify-between w-full px-4 space-x-4 text-gray-700 md:space-x-8 md:max-w-2xl md:px-8">
         <h1 className="flex-none">
           <Link href={ROUTE_BLOG}>

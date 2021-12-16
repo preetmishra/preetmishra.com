@@ -74,7 +74,7 @@ const About: NextPage = () => {
           </section>
         </section>
         <img
-          className="flex-none w-24 h-24 rounded-full md:ml-2 md:-mr-4 sm:w-32 sm:h-32 md:w-48 md:h-48 filter drop-shadow-sm"
+          className="flex-none w-24 h-24 rounded-full md:ml-2 md:-mr-4 sm:w-32 sm:h-32 md:w-48 md:h-48 drop-shadow-sm"
           src="/images/avatar.jpeg"
           alt={AUTHOR_FULL_NAME}
         />
