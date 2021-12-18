@@ -18,7 +18,7 @@
 .token.operator,
 .token.pseudo-class,
 .token.important {
-  @apply text-teal-400;
+  @apply text-cyan-400;
 }
 
 .token.attr-value,
