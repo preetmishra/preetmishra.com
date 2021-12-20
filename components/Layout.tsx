@@ -6,7 +6,7 @@ const Layout: FunctionComponent = ({ children }) => {
   return (
     <>
       <Navbar />
-      <main className="w-full px-4 md:px-8 md:max-w-2xl">
+      <main className="w-full px-6 md:px-8 md:max-w-6xl">
         {children}
       </main>
     </>

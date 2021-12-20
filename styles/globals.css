@@ -6,4 +6,16 @@
   @apply relative flex flex-col items-center mb-16 space-y-8 md:space-y-10;
 }
 
+.button {
+  @apply block px-6 py-2 font-medium tracking-tight rounded-full;
+}
+
+.button-primary {
+  @apply text-white bg-black;
+}
+
+.button-secondary {
+  @apply text-gray-700 bg-gray-100/75;
+}
+
 @import "./base.css";

@@ -14,7 +14,7 @@ import SolidCross from "../../components/icons/SolidCross";
 import { ROUTE_BLOG } from "../../lib/routes";
 
 const TITLE = `The ${AUTHOR_FULL_NAME} Blog`;
-const DESCRIPTION = `Join ${AUTHOR_FULL_NAME} as he navigates through his personal and professional life.`;
+const DESCRIPTION = `Take a deep dive into the ${AUTHOR_FULL_NAME} blog.`;
 
 type Props = {
   posts: Array<{ frontmatter: Record<string, any>; slug: string }>;
@@ -77,7 +77,7 @@ const Posts: NextPage<Props> = ({ posts }) => {
         <meta name="twitter:title" content={TITLE} />
         <meta name="twitter:description" content={DESCRIPTION} />
       </Head>
-      <section className="flex flex-col space-y-8 font-serif">
+      <section className="flex flex-col space-y-8 font-serif md:max-w-2xl">
         {tag && (
           <section className="flex flex-row items-center justify-between w-full px-4 py-2 space-x-4 tracking-wide text-gray-500 bg-gray-100 border border-gray-100 rounded-md">
             <p>
