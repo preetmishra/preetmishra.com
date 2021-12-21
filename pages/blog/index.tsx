@@ -12,6 +12,7 @@ import {
 } from "../../lib/constants";
 import SolidCross from "../../components/icons/SolidCross";
 import { ROUTE_BLOG } from "../../lib/routes";
+import Button from "../../components/Button";
 
 const TITLE = `The ${AUTHOR_FULL_NAME} Blog`;
 const DESCRIPTION = `Take a deep dive into the ${AUTHOR_FULL_NAME} blog.`;
@@ -77,7 +78,7 @@ const Posts: NextPage<Props> = ({ posts }) => {
         <meta name="twitter:title" content={TITLE} />
         <meta name="twitter:description" content={DESCRIPTION} />
       </Head>
-      <section className="flex flex-col space-y-8 font-serif md:max-w-2xl">
+      <section className="flex flex-col space-y-10 font-serif md:max-w-2xl">
         {tag && (
           <section className="flex flex-row items-center justify-between w-full px-4 py-2 space-x-4 tracking-wide text-gray-500 bg-gray-100 border border-gray-100 rounded-md">
             <p>
@@ -88,24 +89,28 @@ const Posts: NextPage<Props> = ({ posts }) => {
             </button>
           </section>
         )}
-        <section className="space-y-12">
+        <section className="space-y-10 md:space-y-16">
           {filteredPosts.map(
             (
               { frontmatter: { title, published, description }, slug },
               index,
             ) => (
               <article key={index} className="flex flex-col space-y-4">
-                <section className="space-y-2">
-                  <h2 className="text-2xl font-medium tracking-tight text-gray-900">
-                    <Link href={getPostLink(slug)}>{title}</Link>
-                  </h2>
-                  <p className="text-sm text-gray-500">
+                <section className="space-y-1">
+                  <p className="text-sm font-medium text-gray-500">
                     {humanizeDate(published)}
                   </p>
+                  <h2 className="text-2xl font-semibold tracking-tight text-gray-900">
+                    <Link href={getPostLink(slug)}>{title}</Link>
+                  </h2>
                 </section>
-                <p className="text-gray-600">{description}</p>
+                <p className="leading-relaxed text-gray-600">
+                  {description}
+                </p>
                 <Link href={getPostLink(slug)}>
-                  <a className="block">Read More</a>
+                  <a className="font-medium tracking-tight text-gray-900">
+                    Read more
+                  </a>
                 </Link>
               </article>
             ),

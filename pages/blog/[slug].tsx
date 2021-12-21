@@ -91,7 +91,7 @@ const Post: NextPage<Props> = ({ frontmatter, code, slug }) => {
             <h1 className="text-4xl font-bold tracking-tight text-gray-900">
               {title}
             </h1>
-            <p className="text-gray-500">
+            <p className="font-medium text-gray-500">
               <span className="mr-1 sr-only">Posted on</span>
               <time dateTime={toHTMLDateTime(published)}>
                 {humanizeDate(published)}
