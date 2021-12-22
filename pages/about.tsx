@@ -17,7 +17,7 @@ const DESCRIPTION = `Know more about ${AUTHOR_FULL_NAME}.`;
 
 const ExternalLinks: FunctionComponent = () => {
   const UTILITY_EXTERNAL_LINKS =
-    "w-5 h-5 md:w-7 md:h-7 text-gray-800 hover:text-gray-600";
+    "w-5 h-5 md:w-7 md:h-7 text-gray-800 hover:text-gray-600 dark:text-gray-500 dark:hover:text-gray-50";
 
   return (
     <>
@@ -61,10 +61,10 @@ const About: NextPage = () => {
       <section className="flex flex-col-reverse space-y-8 space-y-reverse font-serif md:justify-between md:flex-row md:space-y-0">
         <section className="flex flex-col justify-between space-y-6 md:space-y-8">
           <section className="space-y-1 md:space-y-2">
-            <p className="text-2xl font-bold text-gray-900 md:text-4xl">
+            <p className="text-2xl font-bold text-gray-900 md:text-4xl dark:text-gray-50">
               Hi 👋
             </p>
-            <h1 className="space-x-2 text-xl font-semibold text-gray-500 md:text-2xl">
+            <h1 className="space-x-2 text-xl font-semibold text-gray-500 md:text-2xl dark:text-gray-400">
               I am {AUTHOR_FIRST_NAME}, I am a full-time Software
               Engineer.
             </h1>

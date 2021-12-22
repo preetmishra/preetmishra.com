@@ -88,10 +88,10 @@ const Post: NextPage<Props> = ({ frontmatter, code, slug }) => {
       <article className="space-y-8 font-serif md:max-w-2xl">
         <header className="space-y-6">
           <section className="space-y-2">
-            <h1 className="text-4xl font-bold tracking-tight text-gray-900">
+            <h1 className="text-4xl font-bold tracking-tight text-gray-900 dark:text-gray-50">
               {title}
             </h1>
-            <p className="font-medium text-gray-500">
+            <p className="font-medium text-gray-500 dark:text-gray-400">
               <span className="mr-1 sr-only">Posted on</span>
               <time dateTime={toHTMLDateTime(published)}>
                 {humanizeDate(published)}
@@ -106,7 +106,7 @@ const Post: NextPage<Props> = ({ frontmatter, code, slug }) => {
           </section>
           <Tags tags={parseTags(tags)} shape="rounded" size="small" />
         </header>
-        <section className="prose prose-h2:text-gray-900 prose-h2:tracking-tight prose-h2:font-bold prose-h3:font-semibold prose-h3:text-gray-900">
+        <section className="prose prose-h2:tracking-tight prose-h2:font-bold prose-h3:font-semibold dark:prose-invert dark:prose-pre:bg-[#28282B]">
           <Component />
         </section>
       </article>

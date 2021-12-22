@@ -11,11 +11,11 @@
 }
 
 .button-primary {
-  @apply text-white bg-black;
+  @apply text-white bg-black dark:bg-white dark:text-black;
 }
 
 .button-secondary {
-  @apply text-gray-700 bg-gray-100/75;
+  @apply text-gray-700 bg-gray-100/75 dark:bg-gray-500/25 dark:text-gray-50;
 }
 
 @import "./base.css";

@@ -80,12 +80,12 @@ const Posts: NextPage<Props> = ({ posts }) => {
       </Head>
       <section className="flex flex-col space-y-10 font-serif md:max-w-2xl">
         {tag && (
-          <section className="flex flex-row items-center justify-between w-full px-4 py-2 space-x-4 tracking-wide text-gray-500 bg-gray-100 border border-gray-100 rounded-md">
+          <section className="flex flex-row items-center justify-between w-full px-4 py-2 space-x-4 tracking-wide text-gray-500 bg-gray-100 rounded-md dark:bg-gray-500/25 dark:text-gray-50">
             <p>
               Showing results for <b>{tag}</b>
             </p>
             <button onClick={resetFilter}>
-              <SolidCross className="w-4 h-4 text-gray-500 hover:text-gray-900" />
+              <SolidCross className="w-4 h-4 text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-100" />
             </button>
           </section>
         )}
@@ -97,18 +97,18 @@ const Posts: NextPage<Props> = ({ posts }) => {
             ) => (
               <article key={index} className="flex flex-col space-y-4">
                 <section className="space-y-1">
-                  <p className="text-sm font-medium text-gray-500">
+                  <p className="text-sm font-medium text-gray-500 dark:text-gray-400">
                     {humanizeDate(published)}
                   </p>
-                  <h2 className="text-2xl font-semibold tracking-tight text-gray-900">
+                  <h2 className="text-2xl font-semibold tracking-tight text-gray-900 dark:text-gray-50">
                     <Link href={getPostLink(slug)}>{title}</Link>
                   </h2>
                 </section>
-                <p className="leading-relaxed text-gray-600">
+                <p className="leading-relaxed text-gray-600 dark:text-gray-300">
                   {description}
                 </p>
                 <Link href={getPostLink(slug)}>
-                  <a className="font-medium tracking-tight text-gray-900">
+                  <a className="font-medium tracking-tight text-gray-900 dark:text-gray-50">
                     Read more
                   </a>
                 </Link>
