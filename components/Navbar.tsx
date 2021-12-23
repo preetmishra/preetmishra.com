@@ -1,4 +1,5 @@
 import React, { FunctionComponent } from "react";
+import useSound from "use-sound";
 import { useRouter } from "next/router";
 import Link from "next/link";
 
@@ -30,6 +31,7 @@ type Props = {
 
 const Navbar: FunctionComponent<Props> = ({ theme, setTheme }) => {
   const { pathname } = useRouter();
+  const [playSwitch] = useSound("/sounds/switch.mp3");
 
   const isActive = (_pathname: string): boolean => {
     return pathname.startsWith(_pathname);
@@ -64,6 +66,7 @@ const Navbar: FunctionComponent<Props> = ({ theme, setTheme }) => {
           <li
             className="pl-4 border-l cursor-pointer border-gray-100/90 dark:border-gray-800/50 hover:text-gray-600 dark:hover:text-gray-50/75"
             onClick={() => {
+              playSwitch();
               setTheme(theme === "light" ? "dark" : "light");
             }}
           >
