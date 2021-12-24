@@ -79,7 +79,7 @@ const Navbar: FunctionComponent<Props> = ({ theme, setTheme }) => {
                   setTheme(theme === "light" ? "dark" : "light");
                 }}
               >
-                {theme === "light" ? (
+                {theme && theme === "light" ? (
                   <SolidSun className="w-5 h-5" />
                 ) : (
                   <SolidMoon className="w-5 h-5" />

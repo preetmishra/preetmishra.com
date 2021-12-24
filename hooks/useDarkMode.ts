@@ -4,17 +4,31 @@ export default function useDarkMode(): [
   string,
   React.Dispatch<React.SetStateAction<string>>,
 ] {
-  const [theme, setTheme] = useState<string>(
-    typeof window !== "undefined" ? localStorage.theme : "light",
-  );
+  const [isMounted, setIsMounted] = useState(false);
+  const [theme, setTheme] = useState<string>("");
 
   useEffect(() => {
-    localStorage.theme = theme;
-  }, [theme]);
+    setIsMounted(true);
+  }, []);
 
   useEffect(() => {
+    if (!isMounted) {
+      return;
+    }
+
+    setTheme(localStorage?.theme || "light");
+  }, [isMounted]);
+
+  useEffect(() => {
+    if (!isMounted) {
+      return;
+    }
+
+    // Store the selected theme in the local storage.
+    localStorage.setItem("theme", theme);
+
     if (
-      localStorage.theme === "dark" ||
+      theme === "dark" ||
       (!("theme" in localStorage) &&
         window.matchMedia("(prefers-color-scheme: dark)").matches)
     ) {
@@ -22,7 +36,7 @@ export default function useDarkMode(): [
     } else {
       document.documentElement.classList.remove("dark");
     }
-  }, [theme]);
+  }, [theme, isMounted]);
 
   return [theme, setTheme];
 }
