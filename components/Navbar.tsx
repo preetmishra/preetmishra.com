@@ -45,38 +45,49 @@ const Navbar: FunctionComponent<Props> = ({ theme, setTheme }) => {
             <a title={AUTHOR_FULL_NAME}>{AUTHOR_FULL_NAME}</a>
           </Link>
         </h1>
-        <ul className="flex flex-wrap items-center gap-x-4">
-          {NAV_LINKS.map(({ path, label }, index) => (
-            <li key={index}>
-              <Link href={path}>
-                <a
-                  className={
-                    "hover:text-gray-600 dark:hover:text-gray-50/75" +
-                    (isActive(path)
-                      ? " text-gray-600 dark:text-gray-50/75"
-                      : "")
-                  }
-                  title={label}
-                >
-                  {label}
-                </a>
-              </Link>
+        <section className="flex items-center gap-x-4">
+          <ul className="flex flex-wrap items-center gap-x-4">
+            {NAV_LINKS.map(({ path, label }, index) => (
+              <li key={index}>
+                <Link href={path}>
+                  <a
+                    className={
+                      "hover:text-gray-600 dark:hover:text-gray-50/75" +
+                      (isActive(path)
+                        ? " text-gray-600 dark:text-gray-50/75"
+                        : "")
+                    }
+                    title={label}
+                  >
+                    {label}
+                  </a>
+                </Link>
+              </li>
+            ))}
+          </ul>
+          <ul className="flex flex-wrap items-center pl-4 border-l border-gray-100/90 dark:border-gray-800/50 gap-x-4">
+            <li>
+              <button
+                title={
+                  theme === "light"
+                    ? "Toggle Dark Mode"
+                    : "Toggle Light Mode"
+                }
+                className="flex hover:text-gray-600 dark:hover:text-gray-50/75"
+                onClick={() => {
+                  playSwitch();
+                  setTheme(theme === "light" ? "dark" : "light");
+                }}
+              >
+                {theme === "light" ? (
+                  <SolidSun className="w-5 h-5" />
+                ) : (
+                  <SolidMoon className="w-5 h-5" />
+                )}
+              </button>
             </li>
-          ))}
-          <li
-            className="pl-4 border-l cursor-pointer border-gray-100/90 dark:border-gray-800/50 hover:text-gray-600 dark:hover:text-gray-50/75"
-            onClick={() => {
-              playSwitch();
-              setTheme(theme === "light" ? "dark" : "light");
-            }}
-          >
-            {theme === "light" ? (
-              <SolidSun className="w-5 h-5" />
-            ) : (
-              <SolidMoon className="w-5 h-5" />
-            )}
-          </li>
-        </ul>
+          </ul>
+        </section>
       </div>
     </nav>
   );
