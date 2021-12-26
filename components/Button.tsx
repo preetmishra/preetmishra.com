@@ -1,20 +1,29 @@
-import { FunctionComponent } from "react";
-import Link from "next/link";
+import { FunctionComponent, MouseEventHandler, ReactNode } from "react";
 
 type Props = {
   className: string;
-  href: string;
+  title: string;
+  name?: string;
+  children: ReactNode;
+  onClick: MouseEventHandler<HTMLButtonElement>;
 };
 
 const Button: FunctionComponent<Props> = ({
   className,
-  href,
+  title,
+  name,
   children,
+  onClick,
 }) => {
   return (
-    <Link href={href}>
-      <a className={className}>{children}</a>
-    </Link>
+    <button
+      className={className}
+      title={title}
+      name={name}
+      onClick={onClick}
+    >
+      {children}
+    </button>
   );
 };
 

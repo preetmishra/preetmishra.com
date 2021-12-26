@@ -2,7 +2,7 @@ import { NextPage } from "next";
 import Head from "next/head";
 import { FunctionComponent } from "react";
 
-import ExternalLinkWithIcon from "../components/ExternalLinkWithIcon";
+import Bink from "../components/Bink";
 import GitHub from "../components/icons/GitHub";
 import LinkedIn from "../components/icons/LinkedIn";
 import Twitter from "../components/icons/Twitter";
@@ -16,23 +16,29 @@ const TITLE = `About ${AUTHOR_FULL_NAME}`;
 const DESCRIPTION = `Know more about ${AUTHOR_FULL_NAME}.`;
 
 const ExternalLinks: FunctionComponent = () => {
-  const UTILITY_EXTERNAL_LINKS =
-    "w-5 h-5 md:w-7 md:h-7 text-gray-800 hover:text-gray-600 dark:text-gray-500 dark:hover:text-gray-50";
-
   return (
     <>
-      <ExternalLinkWithIcon
+      <Bink
         href="https://www.github.com/preetmishra"
-        icon={<GitHub className={UTILITY_EXTERNAL_LINKS} />}
-      />
-      <ExternalLinkWithIcon
+        className="button button-text"
+        isExternal={true}
+      >
+        <GitHub className="w-5 h-5 md:w-7 md:h-7" />
+      </Bink>
+      <Bink
         href="https://www.linkedin.com/in/preetmishra/"
-        icon={<LinkedIn className={UTILITY_EXTERNAL_LINKS} />}
-      />
-      <ExternalLinkWithIcon
-        href="https://twitter.com/wickedmishra"
-        icon={<Twitter className={UTILITY_EXTERNAL_LINKS} />}
-      />
+        className="button button-text"
+        isExternal={true}
+      >
+        <LinkedIn className="w-5 h-5 md:w-7 md:h-7" />
+      </Bink>
+      <Bink
+        href="https://www.github.com/preetmishra"
+        className="button button-text"
+        isExternal={true}
+      >
+        <Twitter className="w-5 h-5 md:w-7 md:h-7" />
+      </Bink>
     </>
   );
 };

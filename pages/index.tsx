@@ -1,6 +1,5 @@
 import { NextPage } from "next";
 import Head from "next/head";
-import Button from "../components/Button";
 
 import {
   AUTHOR_FIRST_NAME,
@@ -8,6 +7,7 @@ import {
   AUTHOR_TWITTER_HANDLE,
 } from "../lib/constants";
 import { ROUTE_ABOUT, ROUTE_BLOG } from "../lib/routes";
+import Bink from "../components/Bink";
 
 const TITLE = AUTHOR_FULL_NAME;
 const DESCRIPTION = `Join ${AUTHOR_FULL_NAME} as he navigates through his personal and professional life.`;
@@ -41,15 +41,12 @@ const Home: NextPage = () => {
           </h1>
         </section>
         <section className="flex flex-row flex-wrap gap-2">
-          <Button className="button button-primary" href={ROUTE_BLOG}>
+          <Bink className="button button-primary" href={ROUTE_BLOG}>
             Checkout the blog
-          </Button>
-          <Button
-            className="button button-secondary"
-            href={ROUTE_ABOUT}
-          >
+          </Bink>
+          <Bink className="button button-secondary" href={ROUTE_ABOUT}>
             Know more
-          </Button>
+          </Bink>
         </section>
       </section>
     </>

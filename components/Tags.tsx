@@ -2,6 +2,7 @@ import { FunctionComponent } from "react";
 import { useRouter } from "next/router";
 
 import { ROUTE_BLOG } from "../lib/routes";
+import Button from "./Button";
 
 type Props = {
   className?: string;
@@ -35,20 +36,15 @@ const Tags: FunctionComponent<Props> = ({
       }
     >
       {tags.map((tag, index) => (
-        <button
+        <Button
+          title={`Filter posts by ${tag}`}
           key={index}
           name={tag}
           onClick={pushFilter}
-          className={
-            "bg-gray-100  dark:bg-gray-500/25 dark:text-gray-50 text-gray-500 focus:bg-gray-900 focus:border-gray-900 focus:text-white hover:bg-gray-900 hover:text-white text-sm" +
-            (shape === "pill" ? " rounded-full" : "") +
-            (shape === "rounded" ? " rounded-md" : "") +
-            (size === "default" ? " px-4 py-2" : "") +
-            (size === "small" ? " px-2 py-1" : "")
-          }
+          className="button-sm button-secondary"
         >
           {tag}
-        </button>
+        </Button>
       ))}
     </section>
   );

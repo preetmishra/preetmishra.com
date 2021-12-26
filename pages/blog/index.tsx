@@ -12,6 +12,7 @@ import {
 } from "../../lib/constants";
 import SolidCross from "../../components/icons/SolidCross";
 import { ROUTE_BLOG } from "../../lib/routes";
+import Bink from "../../components/Bink";
 import Button from "../../components/Button";
 
 const TITLE = `The ${AUTHOR_FULL_NAME} Blog`;
@@ -84,9 +85,13 @@ const Posts: NextPage<Props> = ({ posts }) => {
             <p>
               Showing results for <b>{tag}</b>
             </p>
-            <button onClick={resetFilter}>
-              <SolidCross className="w-4 h-4 text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-100" />
-            </button>
+            <Button
+              title="Clear filter results"
+              className="button button-text"
+              onClick={resetFilter}
+            >
+              <SolidCross className="w-4 h-4" />
+            </Button>
           </section>
         )}
         <section className="space-y-10 md:space-y-16">
@@ -107,11 +112,12 @@ const Posts: NextPage<Props> = ({ posts }) => {
                 <p className="leading-relaxed text-gray-600 dark:text-gray-300">
                   {description}
                 </p>
-                <Link href={getPostLink(slug)}>
-                  <a className="font-medium tracking-tight text-gray-900 dark:text-gray-50">
-                    Read more
-                  </a>
-                </Link>
+                <Bink
+                  className="button button-text"
+                  href={getPostLink(slug)}
+                >
+                  Read more
+                </Bink>
               </article>
             ),
           )}

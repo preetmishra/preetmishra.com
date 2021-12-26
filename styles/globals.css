@@ -10,12 +10,20 @@
   @apply px-5 py-2.5 font-medium tracking-tight rounded-full;
 }
 
+.button-sm {
+  @apply px-2 py-1 text-sm rounded-md;
+}
+
 .button-primary {
   @apply text-white bg-black dark:bg-white dark:text-black;
 }
 
 .button-secondary {
   @apply text-gray-700 bg-gray-100/75 dark:bg-gray-500/25 dark:text-gray-50;
+}
+
+.button-text {
+  @apply px-0 py-0 text-gray-900 rounded-none dark:text-gray-50;
 }
 
 @import "./base.css";

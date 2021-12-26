@@ -7,6 +7,7 @@ import { AUTHOR_FULL_NAME } from "../lib/constants";
 import { ROUTE_ABOUT, ROUTE_BLOG, ROUTE_HOME } from "../lib/routes";
 import SolidSun from "./icons/SolidSun";
 import SolidMoon from "./icons/SolidMoon";
+import Button from "./Button";
 
 type NavLink = {
   path: string;
@@ -67,7 +68,7 @@ const Navbar: FunctionComponent<Props> = ({ theme, setTheme }) => {
           </ul>
           <ul className="flex flex-wrap items-center pl-4 border-l border-gray-100/90 dark:border-gray-800/50 gap-x-4">
             <li>
-              <button
+              <Button
                 title={
                   theme === "light"
                     ? "Toggle Dark Mode"
@@ -84,7 +85,7 @@ const Navbar: FunctionComponent<Props> = ({ theme, setTheme }) => {
                 ) : (
                   <SolidMoon className="w-5 h-5" />
                 )}
-              </button>
+              </Button>
             </li>
           </ul>
         </section>
