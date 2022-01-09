@@ -106,7 +106,7 @@ const Post: NextPage<Props> = ({ frontmatter, code, slug }) => {
           </section>
           <Tags tags={parseTags(tags)} shape="rounded" size="small" />
         </header>
-        <section className="prose prose-h2:tracking-tight prose-h2:font-bold prose-h3:font-semibold dark:prose-invert dark:prose-pre:bg-[#28282B]">
+        <section className="prose prose-h2:tracking-tight prose-h2:font-semibold prose-h3:font-semibold dark:prose-invert dark:prose-pre:bg-[#28282B]">
           <Component />
         </section>
       </article>
