@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+body {
+  @apply font-serif;
+}
+
 #__next {
   @apply relative flex flex-col items-center mb-32 space-y-8 md:space-y-10;
 }

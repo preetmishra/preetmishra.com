@@ -79,7 +79,7 @@ const Posts: NextPage<Props> = ({ posts }) => {
         <meta name="twitter:title" content={TITLE} />
         <meta name="twitter:description" content={DESCRIPTION} />
       </Head>
-      <section className="flex flex-col space-y-10 font-serif md:max-w-2xl">
+      <section className="flex flex-col space-y-10 md:max-w-2xl">
         {tag && (
           <section className="flex flex-row items-center justify-between w-full px-4 py-2 space-x-4 tracking-wide text-gray-500 bg-gray-100 rounded-md dark:bg-gray-500/25 dark:text-gray-50">
             <p>

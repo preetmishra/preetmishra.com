@@ -85,7 +85,7 @@ const Post: NextPage<Props> = ({ frontmatter, code, slug }) => {
         <meta name="twitter:title" content={title} />
         <meta name="twitter:description" content={description} />
       </Head>
-      <article className="space-y-8 font-serif md:max-w-2xl">
+      <article className="space-y-8 md:max-w-2xl">
         <header className="space-y-6">
           <section className="space-y-2">
             <h1 className="text-4xl font-bold tracking-tight text-gray-900 dark:text-gray-50">

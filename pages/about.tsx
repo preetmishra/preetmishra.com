@@ -64,7 +64,7 @@ const About: NextPage = () => {
         <meta name="twitter:title" content={TITLE} />
         <meta name="twitter:description" content={DESCRIPTION} />
       </Head>
-      <section className="flex flex-col-reverse space-y-8 space-y-reverse font-serif md:justify-between md:flex-row md:space-y-0">
+      <section className="flex flex-col-reverse space-y-8 space-y-reverse md:justify-between md:flex-row md:space-y-0">
         <section className="flex flex-col justify-between space-y-6 md:space-y-8">
           <section className="space-y-1 md:space-y-2">
             <p className="text-2xl font-bold text-gray-900 md:text-4xl dark:text-gray-50">
