@@ -23,7 +23,7 @@ class CustomDocument extends Document {
           <link rel="icon" href="/favicon.ico" />
           <meta property="og:site_name" content={AUTHOR_FULL_NAME} />
         </Head>
-        <body className="dark:bg-[#191919]">
+        <body className="dark:bg-[#181818]">
           <Main />
           <NextScript />
         </body>

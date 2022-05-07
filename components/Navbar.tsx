@@ -39,7 +39,7 @@ const Navbar: FunctionComponent<Props> = ({ theme, setTheme }) => {
   };
 
   return (
-    <nav className="sticky top-0 z-50 flex justify-center w-full h-16 bg-white border-b dark:bg-[#191919] dark:border-gray-800/50 border-gray-100/90 md:h-20">
+    <nav className="sticky top-0 z-50 flex justify-center w-full h-16 bg-white border-b dark:bg-[#181818] dark:border-gray-800/30 border-gray-100/90 md:h-20">
       <div className="flex items-center justify-between w-full px-6 space-x-4 font-medium tracking-tight text-gray-900/50 dark:text-gray-300/50 md:space-x-8 md:max-w-6xl md:px-8">
         <h1 className="flex-none">
           <Link href={ROUTE_HOME}>
@@ -66,7 +66,7 @@ const Navbar: FunctionComponent<Props> = ({ theme, setTheme }) => {
               </li>
             ))}
           </ul>
-          <ul className="flex flex-wrap items-center pl-4 border-l border-gray-100/90 dark:border-gray-800/50 gap-x-4">
+          <ul className="flex flex-wrap items-center pl-4 border-l border-gray-100/90 dark:border-gray-800/30 gap-x-4">
             <li>
               <Button
                 title={
