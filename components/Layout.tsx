@@ -9,7 +9,7 @@ const Layout: FunctionComponent = ({ children }) => {
   return (
     <>
       <Navbar theme={theme} setTheme={setTheme} />
-      <main className="w-full px-6 md:px-8 md:max-w-6xl">
+      <main className="w-full px-6 md:px-8 md:max-w-5xl">
         {children}
       </main>
     </>
