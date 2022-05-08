@@ -17,6 +17,7 @@ import {
   AUTHOR_FULL_NAME,
   AUTHOR_TWITTER_HANDLE,
 } from "../../lib/constants";
+import Views from "../../components/Views";
 
 interface Params extends ParsedUrlQuery {
   slug: string;
@@ -91,18 +92,22 @@ const Post: NextPage<Props> = ({ frontmatter, code, slug }) => {
             <h1 className="text-4xl font-bold tracking-tight text-gray-900 dark:text-gray-50">
               {title}
             </h1>
-            <p className="font-medium text-gray-500 dark:text-gray-400">
-              <span className="mr-1 sr-only">Posted on</span>
-              <time dateTime={toHTMLDateTime(published)}>
-                {humanizeDate(published)}
-              </time>
-              <span className="ml-1 sr-only">by</span>
-              <Link href={ROUTE_ABOUT}>
-                <a rel="author" className="ml-1 sr-only">
-                  {AUTHOR_FULL_NAME}
-                </a>
-              </Link>
-            </p>
+            <div className="flex space-x-2 font-medium text-gray-500 dark:text-gray-400">
+              <p>
+                <span className="mr-1 sr-only">Posted on</span>
+                <time dateTime={toHTMLDateTime(published)}>
+                  {humanizeDate(published)}
+                </time>
+                <span className="ml-1 sr-only">by</span>
+                <Link href={ROUTE_ABOUT}>
+                  <a rel="author" className="ml-1 sr-only">
+                    {AUTHOR_FULL_NAME}
+                  </a>
+                </Link>
+              </p>
+              <span>•</span>
+              <Views route={slug} />
+            </div>
           </section>
           <Tags tags={parseTags(tags)} shape="rounded" size="small" />
         </header>

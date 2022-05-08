@@ -6,6 +6,7 @@ import Bink from "../components/Bink";
 import GitHub from "../components/icons/GitHub";
 import LinkedIn from "../components/icons/LinkedIn";
 import Twitter from "../components/icons/Twitter";
+import Views from "../components/Views";
 import {
   AUTHOR_FIRST_NAME,
   AUTHOR_FULL_NAME,
@@ -64,6 +65,7 @@ const About: NextPage = () => {
         <meta name="twitter:title" content={TITLE} />
         <meta name="twitter:description" content={DESCRIPTION} />
       </Head>
+      <Views route="about" render={false} />
       <section className="flex flex-col-reverse space-y-8 space-y-reverse md:justify-between md:flex-row md:space-y-0">
         <section className="flex flex-col justify-between space-y-6 md:space-y-8">
           <section className="space-y-1 md:space-y-2">

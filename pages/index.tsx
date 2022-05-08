@@ -8,6 +8,7 @@ import {
 } from "../lib/constants";
 import { ROUTE_ABOUT, ROUTE_BLOG } from "../lib/routes";
 import Bink from "../components/Bink";
+import Views from "../components/Views";
 
 const TITLE = AUTHOR_FULL_NAME;
 const DESCRIPTION = `Join ${AUTHOR_FULL_NAME} as he navigates through his personal and professional life.`;
@@ -30,6 +31,7 @@ const Home: NextPage = () => {
         <meta name="twitter:title" content={TITLE} />
         <meta name="twitter:description" content={DESCRIPTION} />
       </Head>
+      <Views route="home" render={false} />
       <section className="flex flex-col justify-center h-[65vh] space-y-8 font-serif">
         <section className="space-y-1 md:space-y-2">
           <p className="text-2xl font-bold text-gray-900 dark:text-gray-50 md:text-4xl">

@@ -14,6 +14,7 @@ import SolidCross from "../../components/icons/SolidCross";
 import { ROUTE_BLOG } from "../../lib/routes";
 import Bink from "../../components/Bink";
 import Button from "../../components/Button";
+import Views from "../../components/Views";
 
 const TITLE = `The ${AUTHOR_FULL_NAME} Blog`;
 const DESCRIPTION = `Take a deep dive into the ${AUTHOR_FULL_NAME} blog.`;
@@ -79,6 +80,7 @@ const Posts: NextPage<Props> = ({ posts }) => {
         <meta name="twitter:title" content={TITLE} />
         <meta name="twitter:description" content={DESCRIPTION} />
       </Head>
+      <Views route="blog" render={false} />
       <section className="flex flex-col space-y-10 md:max-w-2xl">
         {tag && (
           <section className="flex flex-row items-center justify-between w-full px-4 py-2 space-x-4 tracking-wide text-gray-500 bg-gray-100 rounded-md dark:bg-gray-500/25 dark:text-gray-50">
