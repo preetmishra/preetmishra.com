@@ -34,7 +34,7 @@ const ExternalLinks: FunctionComponent = () => {
         <LinkedIn className="w-5 h-5 md:w-7 md:h-7" />
       </Bink>
       <Bink
-        href="https://www.github.com/preetmishra"
+        href="https://www.twitter.com/wickedmishra"
         className="button button-text"
         isExternal={true}
       >
