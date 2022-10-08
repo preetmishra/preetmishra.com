@@ -4,7 +4,9 @@ import { FunctionComponent } from "react";
 
 import Bink from "../components/Bink";
 import GitHub from "../components/icons/GitHub";
+import LeetCode from "../components/icons/LeetCode";
 import LinkedIn from "../components/icons/LinkedIn";
+import StackOverflow from "../components/icons/StackOverflow";
 import Twitter from "../components/icons/Twitter";
 import Views from "../components/Views";
 import {
@@ -20,11 +22,11 @@ const ExternalLinks: FunctionComponent = () => {
   return (
     <>
       <Bink
-        href="https://www.github.com/preetmishra"
+        href="https://www.twitter.com/wickedmishra"
         className="button button-text"
         isExternal={true}
       >
-        <GitHub className="w-5 h-5 md:w-7 md:h-7" />
+        <Twitter className="w-5 h-5 md:w-7 md:h-7" />
       </Bink>
       <Bink
         href="https://www.linkedin.com/in/preetmishra/"
@@ -34,11 +36,25 @@ const ExternalLinks: FunctionComponent = () => {
         <LinkedIn className="w-5 h-5 md:w-7 md:h-7" />
       </Bink>
       <Bink
-        href="https://www.twitter.com/wickedmishra"
+        href="https://stackoverflow.com/users/8838309/preet-mishra"
         className="button button-text"
         isExternal={true}
       >
-        <Twitter className="w-5 h-5 md:w-7 md:h-7" />
+        <StackOverflow className="w-5 h-5 md:w-7 md:h-7" />
+      </Bink>
+      <Bink
+        href="https://www.github.com/preetmishra"
+        className="button button-text"
+        isExternal={true}
+      >
+        <GitHub className="w-5 h-5 md:w-7 md:h-7" />
+      </Bink>
+      <Bink
+        href="https://leetcode.com/wickedmishra/"
+        className="button button-text"
+        isExternal={true}
+      >
+        <LeetCode className="w-5 h-5 md:w-7 md:h-7" />
       </Bink>
     </>
   );
