@@ -12,6 +12,7 @@
   "dependencies": {
     "@prisma/client": "3.13.0",
     "@tailwindcss/typography": "^0.5.0",
+    "@vercel/analytics": "^0.1.1",
     "esbuild": "^0.13.4",
     "framer-motion": "^6.3.3",
     "mdx-bundler": "^6.0.2",
