@@ -1,5 +1,6 @@
 import Head from "next/head";
 import Link from "next/link";
+import Image from "next/image";
 import { GetStaticProps, NextPage } from "next";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
@@ -12,7 +13,6 @@ import {
 } from "../../lib/constants";
 import SolidCross from "../../components/icons/SolidCross";
 import { ROUTE_BLOG } from "../../lib/routes";
-import Bink from "../../components/Bink";
 import Button from "../../components/Button";
 import Views from "../../components/Views";
 
@@ -35,6 +35,7 @@ export const getStaticProps: GetStaticProps = async () => {
 
 const Posts: NextPage<Props> = ({ posts }) => {
   const [filteredPosts, setFilteredPosts] = useState(posts);
+  const [focusIndex, setFocusIndex] = useState(-1);
 
   const router = useRouter();
   const {
@@ -63,6 +64,14 @@ const Posts: NextPage<Props> = ({ posts }) => {
     });
   };
 
+  const handleFocus = (index: number) => {
+    setFocusIndex(index);
+  };
+
+  const handleBlur = () => {
+    setFocusIndex(-1);
+  };
+
   return (
     <>
       <Head>
@@ -81,7 +90,7 @@ const Posts: NextPage<Props> = ({ posts }) => {
         <meta name="twitter:description" content={DESCRIPTION} />
       </Head>
       <Views route="blog" render={false} />
-      <section className="flex flex-col space-y-10 md:max-w-2xl">
+      <section className="flex flex-col space-y-12">
         {tag && (
           <section className="flex flex-row items-center justify-between w-full px-4 py-2 space-x-4 tracking-wide text-gray-500 bg-gray-100 rounded-md dark:bg-gray-500/25 dark:text-gray-50">
             <p>
@@ -96,31 +105,67 @@ const Posts: NextPage<Props> = ({ posts }) => {
             </Button>
           </section>
         )}
-        <section className="space-y-10 md:space-y-16">
+        <section className="flex flex-wrap justify-between gap-y-16 md:gap-x-4 md:gap-y-20">
           {filteredPosts.map(
             (
-              { frontmatter: { title, published, description }, slug },
+              {
+                frontmatter: {
+                  title,
+                  published,
+                  description,
+                  color,
+                  banner,
+                },
+                slug,
+              },
               index,
             ) => (
-              <article key={index} className="flex flex-col space-y-4">
-                <section className="space-y-1">
-                  <p className="text-sm font-medium text-gray-500 dark:text-gray-400">
-                    {humanizeDate(published)}
-                  </p>
-                  <h2 className="text-2xl font-semibold tracking-tight text-gray-900 dark:text-gray-50">
-                    <Link href={getPostLink(slug)}>{title}</Link>
-                  </h2>
-                </section>
-                <p className="leading-relaxed text-gray-600 dark:text-gray-300">
-                  {description}
-                </p>
-                <Bink
-                  className="button button-text"
-                  href={getPostLink(slug)}
+              <Link href={getPostLink(slug)} passHref key={index}>
+                <a
+                  className={`flex flex-col focus:outline-none will-change-auto outline-none w-full md:w-[45%] hover:cursor-pointer group ${
+                    focusIndex === index || focusIndex === -1
+                      ? "opacity-100"
+                      : "md:opacity-10 md:blur"
+                  } transition-all duration-300`}
+                  onMouseOver={() => handleFocus(index)}
+                  onMouseOut={handleBlur}
+                  onFocus={() => handleFocus(index)}
+                  onBlur={handleBlur}
                 >
-                  Read more
-                </Bink>
-              </article>
+                  <article className="h-full w-full space-y-6">
+                    <div
+                      className="w-full rounded-2xl h-44 md:h-52 flex items-end justify-center overflow-hidden relative"
+                      style={{
+                        background: color,
+                      }}
+                    >
+                      <div
+                        className="h-[90%] w-5/6 absolute will-change-auto -bottom-8 duration-300 group-hover:-bottom-4 group-focus:-bottom-4 ease-in-out"
+                        style={{
+                          transitionProperty: "bottom",
+                        }}
+                      >
+                        <Image
+                          src={banner}
+                          alt={title}
+                          layout="fill"
+                          objectFit="cover"
+                          className="rounded-xl"
+                        />
+                      </div>
+                    </div>
+                    <section className="space-y-1">
+                      <p className="text-sm font-medium text-gray-500 dark:text-gray-400">
+                        {humanizeDate(published)}
+                      </p>
+                      <h2 className="text-2xl font-semibold tracking-tight text-gray-900 dark:text-gray-50">
+                        {title}
+                      </h2>
+                    </section>
+                    <p className="sr-only">{description}</p>
+                  </article>
+                </a>
+              </Link>
             ),
           )}
         </section>
