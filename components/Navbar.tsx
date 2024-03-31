@@ -40,7 +40,7 @@ const Navbar: FunctionComponent<Props> = ({ theme, setTheme }) => {
 
   return (
     <nav className="sticky top-0 z-50 flex justify-center w-full h-16 bg-white border-b dark:bg-[#181818] dark:border-gray-800/30 border-gray-100/90 md:h-20">
-      <div className="flex items-center justify-between w-full px-6 space-x-4 font-medium tracking-tight text-gray-900/50 dark:text-gray-300/50 md:space-x-8 md:max-w-5xl md:px-8">
+      <div className="flex items-center justify-between w-full px-6 space-x-4 text-gray-900/50 dark:text-gray-300/50 md:space-x-8 md:max-w-5xl md:px-8 text-sm md:text-base">
         <h1 className="flex-none">
           <Link href={ROUTE_HOME}>
             <a title={AUTHOR_FULL_NAME}>{AUTHOR_FULL_NAME}</a>

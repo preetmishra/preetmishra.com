@@ -4,6 +4,7 @@ import Image from "next/image";
 import { GetStaticProps, NextPage } from "next";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
+import { motion } from "framer-motion";
 
 import { getPosts } from "../../lib/mdx";
 import { humanizeDate, parseTags } from "../../lib/utils";
@@ -105,7 +106,7 @@ const Posts: NextPage<Props> = ({ posts }) => {
             </Button>
           </section>
         )}
-        <section className="flex flex-wrap justify-between gap-y-16 md:gap-x-4 md:gap-y-20">
+        <section className="space-y-10 md:space-y-12">
           {filteredPosts.map(
             (
               {
@@ -122,45 +123,37 @@ const Posts: NextPage<Props> = ({ posts }) => {
             ) => (
               <Link href={getPostLink(slug)} passHref key={index}>
                 <a
-                  className={`flex flex-col focus:outline-none will-change-auto outline-none w-full md:w-[45%] hover:cursor-pointer group ${
+                  className={`focus:outline-none block will-change-auto outline-none w-full hover:cursor-pointer group ${
                     focusIndex === index || focusIndex === -1
                       ? "opacity-100"
-                      : "md:opacity-10 md:blur"
-                  } transition-all duration-300`}
+                      : "md:opacity-20"
+                  } transition-opacity duration-500`}
                   onMouseOver={() => handleFocus(index)}
                   onMouseOut={handleBlur}
                   onFocus={() => handleFocus(index)}
                   onBlur={handleBlur}
                 >
-                  <article className="h-full w-full space-y-6">
-                    <div
-                      className="w-full rounded-2xl h-44 md:h-52 flex items-end justify-center overflow-hidden relative"
-                      style={{
-                        background: color,
-                      }}
-                    >
-                      <div
-                        className="h-[90%] w-5/6 absolute will-change-auto -bottom-8 duration-300 group-hover:-bottom-4 group-focus:-bottom-4 ease-in-out"
-                        style={{
-                          transitionProperty: "bottom",
-                        }}
-                      >
-                        <Image
-                          src={banner}
-                          alt={title}
-                          layout="fill"
-                          objectFit="cover"
-                          className="rounded-xl"
-                        />
+                  <article className="h-full w-full flex justify-between relative">
+                    <section className="flex flex-col-reverse space-y-reverse md:flex-row space-y-1 md:space-y-0 md:space-x-4 md:items-center md:justify-between w-full">
+                      <div className="relative">
+                        <h2 className="text-xl font-medium tracking-tight text-gray-900 dark:text-gray-50">
+                          {title}
+                        </h2>
+                        <div className="h-24 w-24 md:h-20 md:w-40 absolute -right-48 -top-full opacity-0 md:group-hover:opacity-100 hidden md:group-hover:block">
+                          <div>
+                            <Image
+                              src={banner}
+                              alt={title}
+                              layout="fill"
+                              objectFit="cover"
+                              className="rounded"
+                            />
+                          </div>
+                        </div>
                       </div>
-                    </div>
-                    <section className="space-y-1">
-                      <p className="text-sm font-medium text-gray-500 dark:text-gray-400">
+                      <p className="text-xs text-gray-400 dark:text-gray-500 shrink-0">
                         {humanizeDate(published)}
                       </p>
-                      <h2 className="text-2xl font-semibold tracking-tight text-gray-900 dark:text-gray-50">
-                        {title}
-                      </h2>
                     </section>
                     <p className="sr-only">{description}</p>
                   </article>

@@ -34,10 +34,10 @@ const Home: NextPage = () => {
       <Views route="home" render={false} />
       <section className="flex flex-col justify-center h-[65vh] space-y-8 font-serif">
         <section className="space-y-1 md:space-y-2">
-          <p className="text-2xl font-bold text-gray-900 dark:text-gray-50 md:text-4xl">
+          <p className="text-2xl font-semibold text-gray-900 dark:text-gray-50 md:text-4xl">
             Hi 👋
           </p>
-          <h1 className="space-x-2 text-xl font-semibold text-gray-500 dark:text-gray-400 md:text-2xl">
+          <h1 className="space-x-2 text-xl font-medium text-gray-500 dark:text-gray-400 md:text-2xl">
             I am {AUTHOR_FIRST_NAME}, I am a full-time Software
             Engineer. I like making things simple.
           </h1>
