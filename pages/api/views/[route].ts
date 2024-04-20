@@ -11,7 +11,7 @@ export default async function handler(
     const route = req.query.route.toString();
 
     if (req.method === "POST") {
-      const views = await prisma.views.upsert({
+      const view = await prisma.view.upsert({
         where: { route },
         create: {
           route,
@@ -24,12 +24,12 @@ export default async function handler(
       });
 
       return res.status(200).json({
-        total: views.count.toString(),
+        total: view.count.toString(),
       });
     }
 
     if (req.method === "GET") {
-      const views = await prisma.views.findUnique({
+      const view = await prisma.view.findUnique({
         where: {
           route,
         },
@@ -37,7 +37,7 @@ export default async function handler(
 
       return res
         .status(200)
-        .json({ total: views ? views.count.toString() : 0 });
+        .json({ total: view ? view.count.toString() : 0 });
     }
   } catch (e) {
     console.error("Could not perform the operation", e);
