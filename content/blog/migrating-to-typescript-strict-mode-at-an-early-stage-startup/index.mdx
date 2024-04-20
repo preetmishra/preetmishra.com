@@ -1,0 +1,31 @@
+---
+title: Migrating to TypeScript Strict Mode at an Early-Stage Startup
+published: "04-20-2024"
+description: Migrating to TypeScript Strict Mode amidst packed sprints.
+tags: typescript, migration, code quality
+color: "#F0ECE3"
+banner: /images/migrating-to-typescript-strict-mode-at-an-early-stage-startup.png
+---
+
+Having worked with a few services written in JavaScript at my previous workplace for over two years, I was happy to see TypeScript on my first day at [WisdomCircle](https://wisdomcircle.com/).
+
+We didn’t have strict mode, but what we had was better than vanilla JavaScript.
+
+Migration was always on my mind, but as a startup, we were always busy shipping new ideas and improvements.
+
+For a long time, I deferred the migration for the right moment  —  a relatively less packed sprint where we could migrate. Sprint over sprint, our codebase grew larger. I realized the right time would never come, and a longer wait would mean a bigger debt.
+
+Given our busy sprints, I planned to migrate in phases.
+
+- Phase 1: Migrate all the modules that don’t have any dependency by taking an hour out every other day
+- Phase 2: Migrate all the other modules by blocking a few days in our sprint only for migration
+
+In the first phase, where not everything was in strict mode, we used the [typescript-strict-plugin](https://www.npmjs.com/package/typescript-strict-plugin) to turn strict mode on conditionally.
+
+We completed Phase 1 in two months along with our regular sprints. Thanks to Phase 1, we didn’t have to block too many no-new-development days for Phase 2. We wrapped up Phase 2 in three days.
+
+We shipped our February 2024 release with the migration. Over the next few weeks, we observed a significant reduction in our error rates.
+
+## Closing Notes
+
+We’re very happy with how everything turned out. We have been able to catch more errors first-hand. We have been more productive and more confident in what we ship.
